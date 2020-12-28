@@ -9,16 +9,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
-import { LayoutModule } from 'angular-admin-lte';    //Loading layout module
-import { BoxModule, BoxInfoModule, TabsModule } from 'angular-admin-lte';       //Box component
-
-export var adminLteConf = {
-  skin: 'blue',
-  sidebarLeftMenu: [
-    {label: 'Start', route: '/', iconClasses: 'fa fa-th'},
-  ]
-};
+import { TabsModule } from 'ngx-bootstrap/tabs';       //Box component
 
 @NgModule({
   imports: [
@@ -32,10 +23,7 @@ export var adminLteConf = {
     PaginationModule.forRoot(),
     TimeagoModule.forRoot(),
     ButtonsModule.forRoot(),
-    LayoutModule.forRoot(adminLteConf),   //Provide the configuration to the layout module.
-    ModalModule.forRoot(),
-    BoxModule,
-    BoxInfoModule
+    ModalModule.forRoot()
   ],
   declarations: [SharedComponent],
   exports: [
@@ -46,10 +34,7 @@ export var adminLteConf = {
     PaginationModule,
     TimeagoModule,
     ButtonsModule,
-    ModalModule,
-    LayoutModule,
-    BoxModule,
-    BoxInfoModule
+    ModalModule
   ]
 })
 export class SharedModule { }
