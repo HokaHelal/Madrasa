@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Madrasa.Shared.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Madrasa.Repository.Generic
+namespace Madrasa.Shared.Generic
 {
     public abstract class GenericRepository<T> : IGenericRepository<T>
           where T : BaseEntity
@@ -23,7 +23,6 @@ namespace Madrasa.Repository.Generic
         {
             return await _entities.Set<T>().FindAsync(Id);
         }
-
         public async virtual Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbset.AsNoTracking().ToListAsync<T>();
@@ -32,15 +31,12 @@ namespace Madrasa.Repository.Generic
         {
             return await _dbset.AsNoTracking().CountAsync();
         }
-
-
         public async Task<IEnumerable<T>> FindByAsync(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
             IEnumerable<T> query =  await _dbset.AsNoTracking().Where(predicate).ToListAsync();
 
             return query;
         }
-
         public async Task<T> FindFirstAsync(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
             T query =  await _dbset.AsNoTracking().FirstOrDefaultAsync(predicate);
@@ -58,7 +54,6 @@ namespace Madrasa.Repository.Generic
                 return false;
             }
         }
-
         public async Task<bool> AddAsync(IEnumerable<T> entity)
         {
             try
@@ -74,7 +69,6 @@ namespace Madrasa.Repository.Generic
                 return false;
             }
         }
-
         public async virtual Task<bool> DeleteAsync(int Id)
         {
             T deletedEntry = await GetByIdAsync(Id);
@@ -97,7 +91,6 @@ namespace Madrasa.Repository.Generic
                 return false;
             }  
         }
-
         public virtual void Update(T entity)
         {
             _entities.Entry(entity).State = EntityState.Modified;

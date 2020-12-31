@@ -1,5 +1,5 @@
 ﻿using Madrasa.Repository.Account;
-using Madrasa.Repository.Generic;
+using Madrasa.Shared.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

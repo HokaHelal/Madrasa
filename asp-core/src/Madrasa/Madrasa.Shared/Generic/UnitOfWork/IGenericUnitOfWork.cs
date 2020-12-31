@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Madrasa.Repository.Generic
+namespace Madrasa.Shared.Generic
 {
    public interface IGenericUnitOfWork : IDisposable
    {

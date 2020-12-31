@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Madrasa.Repository.Generic
+namespace Madrasa.Shared.Generic
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {

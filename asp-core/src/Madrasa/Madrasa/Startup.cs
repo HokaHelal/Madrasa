@@ -1,6 +1,6 @@
 using Madrasa.Repository;
 using Madrasa.Repository.Account;
-using Madrasa.Repository.Generic;
+using Madrasa.Shared.Generic;
 using Madrasa.Repository.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,18 +23,12 @@ namespace Madrasa.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options =>
-            {
-                var connStr = _config.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(connStr);
-            });
-            services.AddDbContext<DbContext>(options =>
-            {
-                var connStr = _config.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(connStr);
-            });
+            var connStr = _config.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<DataContext>(options => { options.UseSqlServer(connStr); });
+            services.AddDbContext<DbContext>(options => { options.UseSqlServer(connStr); });
+
             services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IGenericUnitOfWork, GenericUnitOfWork>();
             services.AddScoped<IUserUow, UserUow>();
 
             services.AddControllers();

@@ -1,10 +1,8 @@
-using Madrasa.Repository.Account;
-using Madrasa.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace Madrasa.Repository.Generic
+namespace Madrasa.Shared.Generic
 {
     /// <summary>
     /// The Entity Framework implementation of IUnitOfWork
