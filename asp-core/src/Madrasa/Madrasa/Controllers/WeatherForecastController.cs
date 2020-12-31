@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Madrasa.Controllers
+namespace Madrasa.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

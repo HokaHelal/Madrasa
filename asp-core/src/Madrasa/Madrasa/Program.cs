@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Madrasa
+namespace Madrasa.API
 {
     public class Program
     {
