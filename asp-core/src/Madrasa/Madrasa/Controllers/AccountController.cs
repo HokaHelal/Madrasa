@@ -1,4 +1,4 @@
-﻿using Madrasa.Models;
+﻿using Madrasa.Dto;
 using Madrasa.Service.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,12 +17,11 @@ namespace Madrasa.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Student student)
+        public async Task<IActionResult> Add(StudentDto studentDto)
         {
-            bool isCreated = await _unitOfWork.UserRepository.AddAsync(student);
-            int isSuccessed = await _unitOfWork.CommitAsync();
+            var newStudent = await _unitOfWork.RegisterAsync(studentDto);
 
-            return Ok("User Created Successfully");
+            return Ok(newStudent);
         }
 
         [HttpGet]

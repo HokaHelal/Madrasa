@@ -1,4 +1,7 @@
-﻿using Madrasa.Repository;
+﻿using AutoMapper;
+using Madrasa.Dto;
+using Madrasa.Models;
+using Madrasa.Repository;
 using Madrasa.Repository.Account;
 using Madrasa.Shared.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +16,28 @@ namespace Madrasa.Service.UnitOfWork
     public class UserUow : GenericUnitOfWork, IUserUow
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
+
         public IUserRepository UserRepository => new UserRepository(_context);
 
-        public UserUow(DataContext context) : base(context)
+        public UserUow(DataContext context, IMapper mapper) : base(context)
         {
             _context = context;
+            _mapper = mapper;
         }
 
+        public async Task<NewStudentDto> RegisterAsync(StudentDto studentDto)
+        {
+            var student = _mapper.Map<Student>(studentDto);
+
+            if( await UserRepository.AddAsync(student) && await CommitAsync())
+            {
+                var retStudent = _mapper.Map<NewStudentDto>(student);
+
+                return retStudent;
+            }
+
+            return null;
+        }
     }
 }

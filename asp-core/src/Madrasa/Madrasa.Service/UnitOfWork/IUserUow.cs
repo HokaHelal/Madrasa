@@ -1,4 +1,5 @@
-﻿using Madrasa.Repository.Account;
+﻿using Madrasa.Dto;
+using Madrasa.Repository.Account;
 using Madrasa.Shared.Generic;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace Madrasa.Service.UnitOfWork
     public interface IUserUow : IGenericUnitOfWork
     {
         IUserRepository UserRepository { get; }
+        Task<NewStudentDto> RegisterAsync(StudentDto student);
     }
 }

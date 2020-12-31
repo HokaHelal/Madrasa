@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Madrasa.Dto;
 using Madrasa.Models;
+using Madrasa.Service.Extenstions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace Madrasa.Service.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<StudentDto, Student>();
-            CreateMap<Student, NewStudentDto>();
+            CreateMap<Student, NewStudentDto>()
+                .ForMember(dest => dest.age, opt => opt
+                .MapFrom(src => src.DateOfBirth.CalculateAge()));
         }
     }
 }
