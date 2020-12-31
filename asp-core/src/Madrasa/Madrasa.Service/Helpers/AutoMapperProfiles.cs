@@ -14,8 +14,8 @@ namespace Madrasa.Service.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<StudentDto, Student>();
-            CreateMap<Student, NewStudentDto>()
+            CreateMap<StudentDto, AppUser>();
+            CreateMap<AppUser, NewStudentDto>()
                 .ForMember(dest => dest.age, opt => opt
                 .MapFrom(src => src.DateOfBirth.CalculateAge()));
         }

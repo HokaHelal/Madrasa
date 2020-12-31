@@ -1,5 +1,4 @@
 ﻿using Madrasa.Repository;
-using Madrasa.Repository.Account;
 using Madrasa.Service.Helpers;
 using Madrasa.Service.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Madrasa.Repository.Account;
 
 namespace Madrasa.Service.Extenstions
 {
@@ -23,10 +23,14 @@ namespace Madrasa.Service.Extenstions
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddDbContext<DataContext>(options => { options.UseSqlServer(connStr); });
-            services.AddDbContext<DbContext>(options => { options.UseSqlServer(connStr); });
+            //services.AddDbContext<DbContext>(options => { options.UseSqlServer(connStr); });
 
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<IUserUow, UserUow>();
+            services.AddScoped<ISemesterUow, SemesterUow>();
 
             return services;
         }

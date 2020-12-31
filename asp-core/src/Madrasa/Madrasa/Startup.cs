@@ -9,17 +9,17 @@ namespace Madrasa.API
 {
     public class Startup
     {
+        public IConfiguration _config { get; }
         public Startup(IConfiguration config)
         {
             _config = config;
         }
 
-        public IConfiguration _config { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
+            services.AddIdentityServices(_config);
 
             services.AddControllers();
         }
@@ -36,6 +36,7 @@ namespace Madrasa.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
