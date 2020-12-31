@@ -3,6 +3,7 @@ using Madrasa.Shared.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,29 +19,33 @@ namespace Madrasa.Repository.Account
             _context = context;
         }
 
-        public Task<int> CountAsync()
+        public async Task<int> CountAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Users.CountAsync();
         }
 
-        public Task<IEnumerable<AppUser>> FindByAsync(Expression<Func<AppUser, bool>> predicate)
+        public async Task<IEnumerable<AppUser>> FindByAsync(Expression<Func<AppUser, bool>> predicate)
         {
-            throw new NotImplementedException();
+            var query = _context.Users.Where(predicate);
+
+            return await query.ToListAsync();
         }
 
-        public Task<AppUser> FindFirstAsync(Expression<Func<AppUser, bool>> predicate)
+        public async Task<AppUser> FindFirstAsync(Expression<Func<AppUser, bool>> predicate)
         {
-            throw new NotImplementedException();
+            var query = await _context.Users.AsNoTracking().FirstOrDefaultAsync(predicate);
+
+            return query;
         }
 
-        public Task<IEnumerable<AppUser>> GetAllAsync()
+        public async Task<IEnumerable<AppUser>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Users.AsNoTracking().ToListAsync<AppUser>();
         }
 
-        public Task<AppUser> GetByIdAsync(int Id)
+        public async Task<AppUser> GetByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FindAsync(Id);
         }
     }
 }
