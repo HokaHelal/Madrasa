@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Madrasa.Dto\Madrasa.Dto.csproj" />
+    <ProjectReference Include="..\Madrasa.Models\Madrasa.Models.csproj" />
+    <ProjectReference Include="..\Madrasa.Repository\Madrasa.Repository.csproj" />
+    <ProjectReference Include="..\Madrasa.Shared\Madrasa.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

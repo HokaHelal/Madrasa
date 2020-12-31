@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madrasa.Repository", "Madra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madrasa.Shared", "Madrasa.Shared\Madrasa.Shared.csproj", "{39AFE186-518A-4B6A-BEA3-9FB9EAB25502}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madrasa.Dto", "Madrasa.Dto\Madrasa.Dto.csproj", "{C41F6DDE-5D03-4750-AAA6-A074D1317726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madrasa.Service", "Madrasa.Service\Madrasa.Service.csproj", "{47857945-3B95-4574-852F-56F05E51F7E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{39AFE186-518A-4B6A-BEA3-9FB9EAB25502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39AFE186-518A-4B6A-BEA3-9FB9EAB25502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39AFE186-518A-4B6A-BEA3-9FB9EAB25502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41F6DDE-5D03-4750-AAA6-A074D1317726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41F6DDE-5D03-4750-AAA6-A074D1317726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41F6DDE-5D03-4750-AAA6-A074D1317726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41F6DDE-5D03-4750-AAA6-A074D1317726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47857945-3B95-4574-852F-56F05E51F7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47857945-3B95-4574-852F-56F05E51F7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47857945-3B95-4574-852F-56F05E51F7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47857945-3B95-4574-852F-56F05E51F7E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

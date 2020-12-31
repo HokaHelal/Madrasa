@@ -1,4 +1,5 @@
-﻿using Madrasa.Repository.Account;
+﻿using Madrasa.Repository;
+using Madrasa.Repository.Account;
 using Madrasa.Shared.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Madrasa.Repository.UnitOfWork
+namespace Madrasa.Service.UnitOfWork
 {
     public class UserUow : GenericUnitOfWork, IUserUow
     {

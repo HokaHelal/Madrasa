@@ -1,7 +1,7 @@
 using Madrasa.Repository;
 using Madrasa.Repository.Account;
 using Madrasa.Shared.Generic;
-using Madrasa.Repository.UnitOfWork;
+using Madrasa.Service.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

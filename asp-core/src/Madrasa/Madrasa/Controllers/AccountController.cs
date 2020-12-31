@@ -1,5 +1,5 @@
 ﻿using Madrasa.Models;
-using Madrasa.Repository.UnitOfWork;
+using Madrasa.Service.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
