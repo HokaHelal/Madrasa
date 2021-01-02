@@ -9,6 +9,7 @@ namespace Madrasa.Models
 {
     public class Subject : Entity<int>
     {
+        public ICollection<Teacher> Teachers { get; set; }
     }
 
 }

@@ -11,6 +11,11 @@ namespace Madrasa.Repository
     {
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Grade> Grades { get; set; }
         public DataContext(DbContextOptions options) : base(options)
         {
         }
