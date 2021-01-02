@@ -31,7 +31,6 @@ namespace Madrasa.API.Controllers
             return Ok(newUser);
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {

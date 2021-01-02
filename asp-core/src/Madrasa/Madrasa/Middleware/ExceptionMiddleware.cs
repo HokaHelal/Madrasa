@@ -31,41 +31,36 @@ namespace Madrasa.API.Middleware
             catch (BadRequestException badEx)
             {
                 _logger.LogDebug(badEx, badEx.Message);
-                context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                var response =  badEx.Message;
-                var opts = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                var json = JsonSerializer.Serialize(response, opts);
-
-                await context.Response.WriteAsync(json);
-
+                await HandleApiException(context, HttpStatusCode.BadRequest, badEx.Message);              
             }
             catch (UnauthorizedAccessException unAuthEx)
             {
                 _logger.LogDebug(unAuthEx, unAuthEx.Message);
-                context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                var response =  unAuthEx.Message;
-                var opts = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                var json = JsonSerializer.Serialize(response, opts);
-
-                await context.Response.WriteAsync(json);
+                await HandleApiException(context, HttpStatusCode.Unauthorized, unAuthEx.Message);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
                 var response = _env.IsDevelopment()
                     ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
                     : new ApiException(context.Response.StatusCode, "Internal Server Error");
                     ;
 
-                var opts = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                var json = JsonSerializer.Serialize(response, opts);
-
-                await context.Response.WriteAsync(json);
+                await HandleApiException(context, HttpStatusCode.InternalServerError, response);
             }
         }
+
+        private async Task HandleApiException(HttpContext context, HttpStatusCode statusCode, object exMessage)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)statusCode;
+            var response = exMessage;
+            var opts = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var json = JsonSerializer.Serialize(response, opts);
+
+            await context.Response.WriteAsync(json);
+        }
+
     }
 }
