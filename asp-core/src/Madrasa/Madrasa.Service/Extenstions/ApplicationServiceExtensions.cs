@@ -26,7 +26,7 @@ namespace Madrasa.Service.Extenstions
             //services.AddDbContext<DbContext>(options => { options.UseSqlServer(connStr); });
 
             services.AddScoped<ISubjectRepository, SubjectRepository>();
-            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUserUow, UserUow>();

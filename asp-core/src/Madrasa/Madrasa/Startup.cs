@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Madrasa.Service.Extenstions;
+using Madrasa.API.Middleware;
 
 namespace Madrasa.API
 {
@@ -31,6 +32,8 @@ namespace Madrasa.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

@@ -16,12 +16,28 @@ namespace Madrasa.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add(StudentDto studentDto)
+        [HttpPost("new-student")]
+        public async Task<IActionResult> AddStudent(StudentDto studentDto)
         {
-            var newStudent = await _unitOfWork.RegisterAsync(studentDto);
+            var newUser = await _unitOfWork.RegisterAsync(studentDto);
 
-            return Ok(newStudent);
+            return Ok(newUser);
+        }
+        [HttpPost("new-teacher")]
+        public async Task<IActionResult> AddTeacher(TeacherDto teacherDto)
+        {
+            var newUser = await _unitOfWork.RegisterAsync(teacherDto);
+
+            return Ok(newUser);
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var loggedser = await _unitOfWork.LogInAsync(loginDto);
+
+            return Ok(loggedser);
         }
 
         [HttpGet]

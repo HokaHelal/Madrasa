@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Madrasa.Dto
 {
-    public class NewStudentDto
+    public class LoggedUserDto
     {
         public string name { get; set; }
         public string username { get; set; }
+        public string roleCode { get; set; }
         public string photoUrl { get; set; }
         public int age { get; set; }
     }

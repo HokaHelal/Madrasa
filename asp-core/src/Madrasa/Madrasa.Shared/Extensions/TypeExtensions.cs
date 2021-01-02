@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Madrasa.Service.Extenstions
+namespace Madrasa.Shared.Extenstions
 {
-    public static class DateTimeExtensions
+    public static class TypeExtensions
     {
         public static DateTime ToDoB(this int age)
         {
@@ -19,6 +19,11 @@ namespace Madrasa.Service.Extenstions
             if (dob.Date > today.AddYears(-age)) age--;
 
             return age;
+        }
+
+        public static int ToInt(this string str)
+        {
+            return int.Parse(str);
         }
     }
 }
