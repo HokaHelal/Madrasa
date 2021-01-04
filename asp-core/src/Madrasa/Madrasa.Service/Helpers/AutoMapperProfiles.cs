@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Madrasa.Service.Helpers;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Madrasa.Service.Helpers
 {
@@ -15,6 +17,16 @@ namespace Madrasa.Service.Helpers
     {
         public AutoMapperProfiles()
         {
+            CreateMap<Student, StudentDto>()
+                .ForMember(dest => dest.age, opt => opt
+                .MapFrom(src => src.AppUser.DateOfBirth.CalculateAge()))
+                .ForMember(dest => dest.username, opt => opt.MapFrom(src => src.AppUser.UserName))
+                .ForMember(dest => dest.gender, opt => opt.MapFrom(src => src.AppUser.Gender))
+                .ForMember(dest => dest.email, opt => opt.MapFrom(src => src.AppUser.Email))
+                .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.AppUser.Name))
+                .ForMember(dest => dest.photoUrl, opt => opt.MapFrom(src => src.AppUser.PhotoUrl))
+                ;
+
             CreateMap<StudentDto, AppUser>()
                 .ForMember(dest => dest.RoleId, opt => opt
                 .MapFrom<StudentRoleResolver>());

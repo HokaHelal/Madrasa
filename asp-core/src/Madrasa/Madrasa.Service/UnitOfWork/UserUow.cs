@@ -9,6 +9,8 @@ using Madrasa.Shared.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Madrasa.Service.UnitOfWork
@@ -107,6 +109,15 @@ namespace Madrasa.Service.UnitOfWork
 
             return retUser;
 
+        }
+
+        public async Task<IEnumerable<StudentDto>> GetStudentsByClassId(int classId, int excludeSudentId = -1)
+        {
+            var users = await StudentRepository.GetStudentsByClassId(classId, excludeSudentId);
+
+            var studentsDto = _mapper.Map<IEnumerable<StudentDto>>(users);
+            
+           return studentsDto;
         }
 
     }
