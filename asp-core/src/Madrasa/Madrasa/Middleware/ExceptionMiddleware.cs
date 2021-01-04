@@ -28,6 +28,11 @@ namespace Madrasa.API.Middleware
             {
                 await _next(context);
             }
+            catch (NotFoundException badEx)
+            {
+                _logger.LogDebug(badEx, badEx.Message);
+                await HandleApiException(context, HttpStatusCode.NotFound, badEx.Message);
+            }
             catch (BadRequestException badEx)
             {
                 _logger.LogDebug(badEx, badEx.Message);
