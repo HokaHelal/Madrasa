@@ -17,12 +17,13 @@ namespace Madrasa.Service.Services
     {
         private readonly SymmetricSecurityKey _key;
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public TokenService(UserManager<AppUser> userManager, IConfiguration config)
+        public TokenService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             _userManager = userManager;
-            _userManager = userManager;
+            _roleManager = roleManager;
         }
         public async Task<string> CreateTokenAsync(AppUser appUser)
         {
@@ -34,7 +35,8 @@ namespace Madrasa.Service.Services
 
             var roles = await _userManager.GetRolesAsync(appUser);
 
-            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role,
+                _roleManager.Roles.FirstOrDefault(r => r.Name == role).RoleCode.ToString())));
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
