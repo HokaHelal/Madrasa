@@ -16,6 +16,12 @@ import { ForumMainComponent } from './forum/forum-main/forum-main.component';
 import { ClassRoomComponent } from './class-room/class-room.component';
 import { ClassMatesComponent } from './class-mates/class-mates.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [			
@@ -35,9 +41,19 @@ import { DashboardComponent } from './dashboard/dashboard.component';
    ],
   imports: [
     BrowserModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+   // {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
