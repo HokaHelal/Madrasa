@@ -9,7 +9,7 @@ namespace Madrasa.Models
         public Topic()
         {
         }
-
+        public string Title { get; set; }
         public int SectionId { get; set; }
         public Section Section { get; set; }
         public bool IsPinned { get; set; }

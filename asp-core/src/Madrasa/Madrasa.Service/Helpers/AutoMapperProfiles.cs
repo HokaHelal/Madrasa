@@ -30,6 +30,11 @@ namespace Madrasa.Service.Helpers
             CreateMap<StudentDto, AppUser>()
                 .ForMember(dest => dest.RoleId, opt => opt
                 .MapFrom<StudentRoleResolver>());
+
+            CreateMap<NewTopicDto, Topic>();
+            CreateMap<NewPostDto, Post>();
+            CreateMap<NewTopicDto, Topic>();
+            
             CreateMap<TeacherDto, AppUser>()
                 .ForMember(dest => dest.RoleId, opt => opt
                 .MapFrom<TeacherRoleResolver>());

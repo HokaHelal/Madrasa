@@ -29,10 +29,16 @@ namespace Madrasa.Service.Extenstions
 
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+
+            services.AddScoped<ISectionRepository, SectionRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ITopicRepository, TopicRepository>();
+
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUserUow, UserUow>();
             services.AddScoped<ISemesterUow, SemesterUow>();
+            services.AddScoped<IForumUow, ForumUow>();
 
             return services;
         }
