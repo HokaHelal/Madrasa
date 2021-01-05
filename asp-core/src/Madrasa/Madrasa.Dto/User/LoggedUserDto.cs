@@ -12,6 +12,7 @@ namespace Madrasa.Dto
         public string username { get; set; }
         public string roleCode { get; set; }
         public string photoUrl { get; set; }
+        public string token { get; set; }
         public int age { get; set; }
     }
 }

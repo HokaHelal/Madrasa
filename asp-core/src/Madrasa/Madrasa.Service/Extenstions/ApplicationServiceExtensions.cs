@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Madrasa.Repository.Account;
+using Madrasa.Service.Services;
+using Madrasa.Service.Interfaces;
 
 namespace Madrasa.Service.Extenstions
 {
@@ -21,7 +23,7 @@ namespace Madrasa.Service.Extenstions
             var connStr = config.GetConnectionString("DefaultConnection");
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-
+            services.AddScoped<ITokenService, TokenService>();
             services.AddDbContext<DataContext>(options => { options.UseSqlServer(connStr); });
             //services.AddDbContext<DbContext>(options => { options.UseSqlServer(connStr); });
 

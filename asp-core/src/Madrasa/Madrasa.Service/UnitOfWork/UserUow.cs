@@ -3,6 +3,7 @@ using Madrasa.Dto;
 using Madrasa.Models;
 using Madrasa.Repository;
 using Madrasa.Repository.Account;
+using Madrasa.Service.Interfaces;
 using Madrasa.Shared.Errors;
 using Madrasa.Shared.Extenstions;
 using Madrasa.Shared.Generic;
@@ -18,6 +19,7 @@ namespace Madrasa.Service.UnitOfWork
     public class UserUow : GenericUnitOfWork, IUserUow
     {
         private readonly DataContext _context;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         public IUserRepository UserRepository => new UserRepository(_context);
         public ITeacherRepository TeacherRepository => new TeacherRepository(_context);
@@ -26,10 +28,14 @@ namespace Madrasa.Service.UnitOfWork
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        public UserUow(DataContext context, IMapper mapper,
-            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(context)
+        public UserUow(DataContext context,
+            ITokenService tokenService,
+            IMapper mapper,
+            UserManager<AppUser> userManager, 
+            SignInManager<AppUser> signInManager) : base(context)
         {
             _context = context;
+            _tokenService = tokenService;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -106,6 +112,7 @@ namespace Madrasa.Service.UnitOfWork
             if (!result.Succeeded) throw new BadRequestException("Invalid Username or password");
 
             var retUser = _mapper.Map<LoggedUserDto>(usr);
+            retUser.token = await _tokenService.CreateTokenAsync(usr);
 
             return retUser;
 

@@ -1,4 +1,5 @@
 ﻿using Madrasa.Dto;
+using Madrasa.Service.Interfaces;
 using Madrasa.Service.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using System;
