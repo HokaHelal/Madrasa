@@ -17,5 +17,10 @@ namespace Madrasa.Models
         public ICollection<Student> Students { get; set; }
         public ICollection<Teacher> Teachers { get; set; }
         public ICollection<Manager> Managers { get; set; }
+        public ICollection<Topic> Topics { get; set; }
+        public ICollection<Post> Posts { get; set; }
+        public ICollection<Topic> TopicsLiked { get; set; }
+        public ICollection<Post> PostsLiked { get; set; }
+
     }
 }

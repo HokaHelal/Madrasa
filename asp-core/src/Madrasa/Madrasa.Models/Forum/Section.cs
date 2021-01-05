@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace Madrasa.Models
 {
-    public class Class : Entity<int>
+    public class Section : Entity<int>
     {
-        public int GradeId { get; set; }
-        public Grade Grade { get; set; }
+        public int OrderNum { get; set; }
         public ICollection<Topic> Topics { get; set; }
     }
 }

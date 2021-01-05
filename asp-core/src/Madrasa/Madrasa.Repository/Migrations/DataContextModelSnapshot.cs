@@ -19,6 +19,36 @@ namespace Madrasa.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
+            modelBuilder.Entity("AppUserPost", b =>
+                {
+                    b.Property<int>("PostsLikedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserLikesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostsLikedId", "UserLikesId");
+
+                    b.HasIndex("UserLikesId");
+
+                    b.ToTable("AppUserPost");
+                });
+
+            modelBuilder.Entity("AppUserTopic", b =>
+                {
+                    b.Property<int>("TopicsLikedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserLikesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TopicsLikedId", "UserLikesId");
+
+                    b.HasIndex("UserLikesId");
+
+                    b.ToTable("AppUserTopic");
+                });
+
             modelBuilder.Entity("Madrasa.Models.AppRole", b =>
                 {
                     b.Property<int>("Id")
@@ -196,6 +226,52 @@ namespace Madrasa.Repository.Migrations
                     b.ToTable("Managers");
                 });
 
+            modelBuilder.Entity("Madrasa.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Madrasa.Models.Section", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderNum")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sections");
+                });
+
             modelBuilder.Entity("Madrasa.Models.Session", b =>
                 {
                     b.Property<int>("Id")
@@ -268,6 +344,42 @@ namespace Madrasa.Repository.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("Madrasa.Models.Topic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPinned")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -371,6 +483,36 @@ namespace Madrasa.Repository.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("AppUserPost", b =>
+                {
+                    b.HasOne("Madrasa.Models.Post", null)
+                        .WithMany()
+                        .HasForeignKey("PostsLikedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Madrasa.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AppUserTopic", b =>
+                {
+                    b.HasOne("Madrasa.Models.Topic", null)
+                        .WithMany()
+                        .HasForeignKey("TopicsLikedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Madrasa.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Madrasa.Models.AppUser", b =>
                 {
                     b.HasOne("Madrasa.Models.AppRole", "UserRoles")
@@ -400,6 +542,25 @@ namespace Madrasa.Repository.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Madrasa.Models.Post", b =>
+                {
+                    b.HasOne("Madrasa.Models.AppUser", "Author")
+                        .WithMany("Posts")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Madrasa.Models.Topic", "Topic")
+                        .WithMany("Posts")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("Madrasa.Models.Student", b =>
@@ -438,6 +599,33 @@ namespace Madrasa.Repository.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("Madrasa.Models.Topic", b =>
+                {
+                    b.HasOne("Madrasa.Models.AppUser", "Author")
+                        .WithMany("Topics")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Madrasa.Models.Class", "Class")
+                        .WithMany("Topics")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Madrasa.Models.Section", "Section")
+                        .WithMany("Topics")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -500,9 +688,18 @@ namespace Madrasa.Repository.Migrations
                 {
                     b.Navigation("Managers");
 
+                    b.Navigation("Posts");
+
                     b.Navigation("Students");
 
                     b.Navigation("Teachers");
+
+                    b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("Madrasa.Models.Class", b =>
+                {
+                    b.Navigation("Topics");
                 });
 
             modelBuilder.Entity("Madrasa.Models.Grade", b =>
@@ -510,9 +707,19 @@ namespace Madrasa.Repository.Migrations
                     b.Navigation("Classes");
                 });
 
+            modelBuilder.Entity("Madrasa.Models.Section", b =>
+                {
+                    b.Navigation("Topics");
+                });
+
             modelBuilder.Entity("Madrasa.Models.Subject", b =>
                 {
                     b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("Madrasa.Models.Topic", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }
