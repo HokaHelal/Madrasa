@@ -32,9 +32,25 @@ namespace Madrasa.Service.Helpers
                 .MapFrom<StudentRoleResolver>());
 
             CreateMap<NewTopicDto, Topic>();
+            CreateMap<Topic, TopicMainDto>()
+              .ForMember(dest => dest.authorId, opt => opt.MapFrom(src => src.Author.Id))
+              .ForMember(dest => dest.authorName, opt => opt.MapFrom(src => src.Author.Name))
+              .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl));
+
             CreateMap<NewPostDto, Post>();
             CreateMap<NewTopicDto, Topic>();
-            
+            CreateMap<Topic, TopicDetailDto>()
+             .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl))
+             .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.UserLikes));
+            CreateMap<Post, PostDetailDto>()
+             .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl))
+             .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.UserLikes));
+            CreateMap<Section, MainForumDto>()
+             .ForMember(dest => dest.topics, opt => opt.MapFrom(src => src.Topics));
+
+            CreateMap<AppUser, LikeDto>()
+            .ForMember(dest => dest.photoUrl, opt => opt.MapFrom(src => src.PhotoUrl));
+
             CreateMap<TeacherDto, AppUser>()
                 .ForMember(dest => dest.RoleId, opt => opt
                 .MapFrom<TeacherRoleResolver>());
