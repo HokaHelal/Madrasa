@@ -36,6 +36,11 @@
               "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
               "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte/docs_html/assets/css/adminlte.min.css",
+
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.bubble.css",
+              "node_modules/quill/dist/quill.snow.css",
+
               "src/styles.scss"
             ],
             "scripts": [
@@ -44,7 +49,9 @@
               "node_modules/admin-lte/dist/js/adminlte.js",
               "node_modules/admin-lte/plugins/chart.js/Chart.js",
               "node_modules/admin-lte/dist/js/demo.js",
-              "node_modules/admin-lte/dist/js/pages/dashboard3.js"
+              "node_modules/admin-lte/dist/js/pages/dashboard3.js",
+
+              "node_modules/quill/dist/quill.min.js"
             ]
           },
           "configurations": {

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { Forum } from 'src/app/_models/Forum';
+import { User } from 'src/app/_models/user';
+import { AuthService } from 'src/app/_services/auth.service';
+import { ForumService } from 'src/app/_services/forum.service';
 
 @Component({
   selector: 'app-forum-main',
@@ -7,9 +13,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForumMainComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  user: User;
+  forumSections: Forum[];
+  latestTopics: Forum;
+  constructor(private accountService: AuthService, private route: ActivatedRoute) { 
   }
 
+  ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.forumSections = data.forumData;
+      this.latestTopics = data.latestTopics;
+      console.log(this.latestTopics);
+    });
+  }
 }

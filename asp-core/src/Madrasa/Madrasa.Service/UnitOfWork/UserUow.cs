@@ -102,7 +102,7 @@ namespace Madrasa.Service.UnitOfWork
 
         public async Task<LoggedUserDto> LogInAsync(LoginDto loginDto)
         {
-            var usr = await _userManager.Users
+            var usr = await _userManager.Users.Include(s => s.Student)
                             .SingleOrDefaultAsync(x => x.UserName == loginDto.username || x.Email == loginDto.username);
 
             if (usr == null) throw new BadRequestException("Invalid Username or password");

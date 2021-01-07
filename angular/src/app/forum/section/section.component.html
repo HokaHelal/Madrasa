@@ -1,0 +1,8 @@
+<div class="col-lg">
+  <div class="card" [ngClass]="{ 'card-danger card-outline': isHighlighted }">
+    <div class="card-header" routerLink="section/{{ forumSection.id }}">
+      <h5 class="m-0">{{forumSection.name}}</h5>      
+    </div>
+    <app-topic [topicsData]="forumSection.topics"></app-topic>
+  </div>
+</div>

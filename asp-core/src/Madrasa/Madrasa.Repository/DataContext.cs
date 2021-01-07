@@ -35,7 +35,12 @@ namespace Madrasa.Repository
                  .HasForeignKey(ur => ur.AuthorId);
 
             builder.Entity<Topic>().HasMany<AppUser>(s => s.UserLikes).WithMany(c => c.TopicsLiked);
-            builder.Entity<Post>().HasMany<AppUser>(s => s.UserLikes).WithMany(c => c.PostsLiked);   
+            builder.Entity<Post>().HasMany<AppUser>(s => s.UserLikes).WithMany(c => c.PostsLiked);
+
+            builder.Entity<AppUser>().HasOne(a => a.Manager).WithOne(a => a.AppUser).HasForeignKey<Manager>(c => c.AppUserId);
+            builder.Entity<AppUser>().HasOne(a => a.Teacher).WithOne(a => a.AppUser).HasForeignKey<Teacher>(c => c.AppUserId);
+            builder.Entity<AppUser>().HasOne(a => a.Student).WithOne(a => a.AppUser).HasForeignKey<Student>(c => c.AppUserId);
+
         }
 
 

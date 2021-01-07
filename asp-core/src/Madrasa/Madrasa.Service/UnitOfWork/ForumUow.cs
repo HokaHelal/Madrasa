@@ -30,24 +30,24 @@ namespace Madrasa.Service.UnitOfWork
             _mapper = mapper;
         }
 
-        public async Task<bool> AddNewTopicAsync(NewTopicDto newTopicDto)
+        public async Task<int> AddNewTopicAsync(NewTopicDto newTopicDto)
         {
             var newTopic = _mapper.Map<Topic>(newTopicDto);
             var isAdded = await TopicRepository.AddAsync(newTopic);
-            if (isAdded)
-                return await CommitAsync();
+            if (isAdded && await CommitAsync())
+                return newTopic.Id;
             else
-                return isAdded;
+                throw new BadRequestException("unable to add new post");
         }
 
-        public async Task<bool> AddNewPostAsync(NewPostDto newPostDto)
+        public async Task<int> AddNewPostAsync(NewPostDto newPostDto)
         {
             var newPost = _mapper.Map<Post>(newPostDto);
             var isAdded = await PostRepository.AddAsync(newPost);
-            if (isAdded)
-                return await CommitAsync();
+            if (isAdded && await CommitAsync())
+                return newPost.Id;
             else
-                return isAdded;
+                throw new BadRequestException("unable to add new post");
         }
 
         public async Task<TopicDetailDto> GetTopicByIdAsync(int Id)
@@ -142,5 +142,47 @@ namespace Madrasa.Service.UnitOfWork
 
             return retLastTopics;
         }
+
+        public async Task<bool> ToggleLike(NewLikeDto newLike)
+        {
+            bool isLiked = false;
+            var user = await _context.Users.FindAsync(newLike.userId);
+
+            if (newLike.isTopic)
+            {
+                var userLike = await _context.Topics
+                    .Include(p => p.UserLikes.Where(x => x.Id == newLike.userId))
+                    .SingleOrDefaultAsync(t => t.Id == newLike.threadId);
+
+                if (userLike?.UserLikes?.Count != 0)                
+                    userLike.UserLikes.Remove(user);
+                else
+                {
+                    userLike.UserLikes.Add(user);
+                    isLiked = true;
+                }
+            }
+            else
+            {
+                var userLike = await _context.Posts
+                    .Include(p => p.UserLikes.Where(x => x.Id == newLike.userId))
+                    .SingleOrDefaultAsync(t => t.Id == newLike.threadId);
+
+                if (userLike?.UserLikes?.Count != 0)
+                    userLike.UserLikes.Remove(user);
+                else
+                {
+                    userLike.UserLikes.Add(user);
+                    isLiked = true;
+                }
+            }
+
+            if (await CommitAsync())
+                return isLiked;
+            else
+                throw new BadRequestException("unable to toggle like");
+          
+        }
+
     }
 }

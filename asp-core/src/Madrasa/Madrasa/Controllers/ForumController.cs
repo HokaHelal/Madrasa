@@ -21,23 +21,18 @@ namespace Madrasa.API.Controllers
         [HttpPost("new-topic")]
         public async Task<IActionResult> NewTopic(NewTopicDto newTopicDto)
         {
-            var isAddedSuccessfully = await _unitOfWork.AddNewTopicAsync(newTopicDto);
+            var newTopicId = await _unitOfWork.AddNewTopicAsync(newTopicDto);
 
-            if (isAddedSuccessfully)
-                return Ok();
-            else
-                throw new BadRequestException("unable to add new topic");
+            return Ok(newTopicId);
         }
 
         [HttpPost("new-post")]
         public async Task<IActionResult> NewPost(NewPostDto newPostDto)
         {
-            var isAddedSuccessfully = await _unitOfWork.AddNewPostAsync(newPostDto);
+            var newPostId = await _unitOfWork.AddNewPostAsync(newPostDto);
 
-            if (isAddedSuccessfully)
-                return Ok();
-            else
-                throw new BadRequestException("unable to add new post");
+            return Ok(newPostId);
+
         }
 
         [HttpDelete("delete-topic")]
@@ -113,5 +108,14 @@ namespace Madrasa.API.Controllers
 
             return Ok(latestTopics);
         }
+
+        [HttpGet("topic/toggle-like")]
+        public async Task<IActionResult> ToggleLike([FromQuery] NewLikeDto newLikeDto)
+        {
+            var isLiked = await _unitOfWork.ToggleLike(newLikeDto);
+
+            return Ok(isLiked);
+        }
+
     }
 }

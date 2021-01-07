@@ -1,0 +1,21 @@
+<div class="post clearfix">
+  <div class="user-block">
+    <img class="img-circle img-bordered-sm" src="{{postData.authorPhoto}}" alt="User Image">
+    <span class="username">
+      <a href="#">{{postData.authorName}}</a>
+    </span>
+    <span class="description">Sent you a message - {{postData.created | date:'medium'}}</span>
+  </div>
+  <!-- /.user-block -->
+    <quill-view-html 
+    [content]="postData.content"
+    theme="snow"></quill-view-html>
+</div>
+<p>
+  <a class="text-sm"
+  (click)="toggleLike()"
+  [ngClass]="{'liked': isLiked, 'not-liked': !isLiked}" class="link">
+  <i class="far fa-thumbs-up mr-1"></i> Like</a>   
+  <a (click)="openModal()" class="float-right text-muted"><u>{{postData.likes.length}} likes</u></a>
+</p>
+<hr/>

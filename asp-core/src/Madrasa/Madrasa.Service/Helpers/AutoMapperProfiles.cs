@@ -55,6 +55,8 @@ namespace Madrasa.Service.Helpers
                 .ForMember(dest => dest.RoleId, opt => opt
                 .MapFrom<TeacherRoleResolver>());
             CreateMap<AppUser, LoggedUserDto>()
+                .ForMember(dest => dest.classId, opt => opt.MapFrom(src => src.Student.ClassId))
+                .ForMember(dest => dest.userId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.age, opt => opt
                 .MapFrom(src => src.DateOfBirth.CalculateAge()))
                 .ForMember(dest => dest.roleCode, opt => opt

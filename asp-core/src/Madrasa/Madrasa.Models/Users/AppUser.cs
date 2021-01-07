@@ -14,13 +14,15 @@ namespace Madrasa.Models
         public string PhotoUrl { get; set; }
         public int RoleId { get; set; }
         public AppRole UserRoles { get; set; }
-        public ICollection<Student> Students { get; set; }
-        public ICollection<Teacher> Teachers { get; set; }
-        public ICollection<Manager> Managers { get; set; }
+        public int StudentId { get; set; }
+        public Student Student { get; set; }
+        public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; }
+        public int ManagerId { get; set; }
+        public Manager Manager { get; set; }
         public ICollection<Topic> Topics { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<Topic> TopicsLiked { get; set; }
         public ICollection<Post> PostsLiked { get; set; }
-
     }
 }

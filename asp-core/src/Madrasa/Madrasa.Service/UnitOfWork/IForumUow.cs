@@ -12,8 +12,8 @@ namespace Madrasa.Service.UnitOfWork
         IPostRepository PostRepository { get; }
         ISectionRepository SectionRepository { get; }
 
-        Task<bool> AddNewTopicAsync(NewTopicDto newTopicDto);
-        Task<bool> AddNewPostAsync(NewPostDto newPostDto);
+        Task<int> AddNewTopicAsync(NewTopicDto newTopicDto);
+        Task<int> AddNewPostAsync(NewPostDto newPostDto);
         Task<TopicDetailDto> GetTopicByIdAsync(int Id);
         Task<IEnumerable<TopicMainDto>> GetTopicByAuthorIdAsync(int authorId);
         Task<IEnumerable<MainForumDto>> GetTopicByClassIdAsync(int classId, int lastTopicsNum = 5);
@@ -21,5 +21,7 @@ namespace Madrasa.Service.UnitOfWork
         Task<IEnumerable<PostDetailDto>> GetPostByAuthorIdAsync(int authorId);
         Task<IEnumerable<TopicMainDto>> GetLatestTopicsAsync(int classId, int lastTopicsNum = 5);
         Task<IEnumerable<TopicMainDto>> GetTopicBySectionIdAsync(int sectionId);
+        Task<bool> ToggleLike(NewLikeDto newLike);
+
     }
 }

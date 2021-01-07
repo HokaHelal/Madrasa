@@ -22,6 +22,17 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { TopicDetailComponent } from './forum/topic-detail/topic-detail.component';
+import { PostDetailComponent } from './forum/post-detail/post-detail.component';
+import { SectionComponent } from './forum/section/section.component';
+import { TopicComponent } from './forum/topic/topic.component';
+import { ForumDataResolver } from './_resolvers/forumData.resolver';
+import { LatestTopicsResolver } from './_resolvers/latestTopics.resolver';
+import { TopicResolver } from './_resolvers/Topic.resolver';
+import { QuillModule } from 'ngx-quill'
+import { LikeModalComponent } from './forum/like-modal/like-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [			
@@ -37,10 +48,19 @@ import { ToastrModule } from 'ngx-toastr';
     ForumMainComponent,
       ClassRoomComponent,
       ClassMatesComponent,
-      DashboardComponent
+      DashboardComponent,
+      ForumMainComponent,
+      TopicDetailComponent,
+      PostDetailComponent,
+      TopicComponent,
+      LikeModalComponent,
+      SectionComponent
    ],
   imports: [
+    CommonModule,
     BrowserModule,
+    ModalModule.forRoot(),
+    QuillModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
@@ -50,6 +70,9 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule
   ],
   providers: [
+    ForumDataResolver,
+    LatestTopicsResolver,
+    TopicResolver,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
    // {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
