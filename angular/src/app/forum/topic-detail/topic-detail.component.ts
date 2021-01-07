@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { NewPost } from 'src/app/_models/NewPost';
@@ -62,12 +62,9 @@ export class TopicDetailComponent implements OnInit {
     this.userService.currentUser$.pipe(take(1)).subscribe(usr => this.user = usr);
    }
    
-   onChange(event){
-     console.log(event);
-   }
   ngOnInit() {
     this.editForm = new FormGroup({
-      editor: new FormControl('')
+      editor: new FormControl('', [Validators.required])
    });
     this.route.data.subscribe(data => {
       this.topic = data.topic;
@@ -75,6 +72,12 @@ export class TopicDetailComponent implements OnInit {
       if(usrlike) this.isLiked = true;
       else this.isLiked = false;
     });
+  }
+
+  
+  onClear() {
+    this.editForm.get('editor').setValue('');
+    this.previewReply = '';
   }
 
   onSubmit() {
@@ -98,9 +101,7 @@ export class TopicDetailComponent implements OnInit {
       }
 
       this.topic.posts.push(post);
-
-      this.editForm.get('editor').setValue('');
-      this.previewReply = '';
+      this.onClear();
     })
   }
 

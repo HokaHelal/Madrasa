@@ -9,3 +9,7 @@
 u, .link {
     cursor: pointer;
 }
+
+::ng-deep quill-editor .ql-container {
+    height: 200px !important;
+}
