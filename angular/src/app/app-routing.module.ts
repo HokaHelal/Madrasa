@@ -7,6 +7,7 @@ import { ClassRoomComponent } from './class-room/class-room.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ForumMainComponent } from './forum/forum-main/forum-main.component';
 import { SectionComponent } from './forum/section/section.component';
+import { ThreadComponent } from './forum/thread/thread.component';
 import { TopicDetailComponent } from './forum/topic-detail/topic-detail.component';
 import { TopicComponent } from './forum/topic/topic.component';
 import { ContentMainComponent } from './theme/content/content-main/content-main.component';
@@ -29,7 +30,7 @@ const routes: Routes = [
     { path: 'forums', component: ForumMainComponent,
       resolve: {forumData: ForumDataResolver, latestTopics: LatestTopicsResolver}},
     { path: 'forums/section/:id', component: SectionComponent },
-    { path: 'forums/topic/:id', component: TopicDetailComponent, resolve: {topic: TopicResolver} }    
+    { path: 'forums/thread/:id', component: ThreadComponent, resolve: {topic: TopicResolver} }    
   ]
 },
 ];

@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="link" *ngFor="let topicData of topicsData"  routerLink="topic/{{ topicData.id }}">
+    <tr class="link" *ngFor="let topicData of topicsData"  routerLink="thread/{{ topicData.id }}">
       <td>
         <i *ngIf="topicData.isPinned" class="fas fa-thumbtack"></i>
       </td>

@@ -33,6 +33,8 @@ import { QuillModule } from 'ngx-quill'
 import { LikeModalComponent } from './forum/like-modal/like-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommonModule } from '@angular/common';
+import { ThreadComponent } from './forum/thread/thread.component';
+import { EditorComponent } from './forum/editor/editor.component';
 
 @NgModule({
   declarations: [			
@@ -46,6 +48,8 @@ import { CommonModule } from '@angular/common';
     ContentMainComponent,
     ContentFooterComponent,
     ForumMainComponent,
+    ThreadComponent,
+    EditorComponent,
       ClassRoomComponent,
       ClassMatesComponent,
       DashboardComponent,
