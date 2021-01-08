@@ -1,5 +1,5 @@
 <app-content-header [title]="'Topic'"></app-content-header>
-<div class="card">
+<div class="card mx-2">
   <div class="card-header p-2">
     <ul class="nav nav-pills text-center">
       <h5>{{ topic.title }}</h5>
@@ -11,7 +11,7 @@
    </div>
 </div>
 
-<div class="card" style="background-color: #f7fbfd">
+<div class="card  mx-2" style="background-color: #f7fbfd">
   <div class="card-header"></div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -21,5 +21,6 @@
     ></app-post-detail>
   </div>
 </div>
-
-<app-editor (Submit)="onSubmit($event)"></app-editor>
+<div class="mx-2" >
+  <app-editor (Submit)="onSubmit($event)"></app-editor>
+</div>

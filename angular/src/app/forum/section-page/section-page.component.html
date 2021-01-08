@@ -1,0 +1,24 @@
+<!-- Content Header (Page header) -->
+<app-content-header [title]="'Section'"></app-content-header>
+<div class="row px-1">
+  <div class="col-lg">
+    <button class="btn btn-md btn-success float-right" (click)="openNewThreadModal()">
+      <i class="fas fa-plus-square mr-2"></i> <strong>New Thread</strong>
+    </button>
+  </div>
+</div>
+<hr />
+<div class="row px-1">
+  <app-section
+    [class]="'primary'"
+    [title]="'Pinned Threads'"
+    [topics]="pinnedThreads"
+  ></app-section>
+</div>
+
+<div class="row px-1">
+  <app-section
+    [title]="sectionName"
+    [topics]="unpinnedThreads"
+  ></app-section>
+</div>

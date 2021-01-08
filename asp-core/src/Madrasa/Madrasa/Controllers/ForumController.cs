@@ -85,10 +85,10 @@ namespace Madrasa.API.Controllers
 
             return Ok(userTopics);
         }
-        [HttpGet("topic/section/{sectionId}")]
-        public async Task<IActionResult> GetBySectionId(int sectionId)
+        [HttpGet("section/{sectionId}/class/{classId}")]
+        public async Task<IActionResult> GetBySectionId(int sectionId, int classId)
         {
-            var sectionTopics = await _unitOfWork.GetTopicBySectionIdAsync(sectionId);
+            var sectionTopics = await _unitOfWork.GetSectionTopicsById(sectionId, classId);
 
             return Ok(sectionTopics);
         }

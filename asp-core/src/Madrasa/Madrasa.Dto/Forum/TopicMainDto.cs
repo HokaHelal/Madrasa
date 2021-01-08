@@ -5,8 +5,6 @@ namespace Madrasa.Dto
     public class TopicMainDto
     {
         public int id { get; set; }
-        public int sectionId { get; set; }
-        public string sectionName { get; set; }
         public bool isPinned { get; set; }
         public string title { get; set; }
         public string content { get; set; }

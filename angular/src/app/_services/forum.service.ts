@@ -6,6 +6,7 @@ import { Forum } from '../_models/Forum';
 import { NewLike } from '../_models/newLike';
 import { NewPost } from '../_models/NewPost';
 import { Post } from '../_models/Post';
+import { Section } from '../_models/Section';
 import { Topic } from '../_models/Topic';
 import { TopicMain } from '../_models/TopicMain';
 
@@ -22,9 +23,9 @@ export class ForumService {
     );
   }
 
-  getTopicsBySectionId(sectionId: number) {
-    return this.httpClient.get<TopicMain[]>(
-      environment.baseUrl + 'forum/section/' + sectionId,
+  getTopicsBySectionId(sectionId: number, classId: number) {
+    return this.httpClient.get<Section>(
+      environment.baseUrl + 'forum/section/' + sectionId + '/class/' + classId,
       {}
     );
   }

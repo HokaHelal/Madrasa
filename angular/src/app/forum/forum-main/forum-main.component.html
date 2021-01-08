@@ -1,5 +1,13 @@
 <!-- Content Header (Page header) -->
 <app-content-header [title]="'Forums'"></app-content-header>
 
-<app-section [isHighlighted]="true"  [forumSection]="latestTopics"></app-section>
-<app-section class="link" *ngFor="let forumSection of forumSections" [forumSection]="forumSection"></app-section>
+<app-section 
+[class]="'danger'"  
+[title]="'Latest Threads'"
+[topics]="latestTopics.topics"
+></app-section>
+<app-section class="link"
+ *ngFor="let forumSection of forumSections"
+ [id]="forumSection.id"
+ [title]="forumSection.name"
+ [topics]="forumSection.topics"></app-section>

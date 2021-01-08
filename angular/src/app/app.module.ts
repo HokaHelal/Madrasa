@@ -35,6 +35,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommonModule } from '@angular/common';
 import { ThreadComponent } from './forum/thread/thread.component';
 import { EditorComponent } from './forum/editor/editor.component';
+import { SectionResolver } from './_resolvers/section.resolver';
+import { SectionPageComponent } from './forum/section-page/section-page.component';
 
 @NgModule({
   declarations: [			
@@ -58,6 +60,7 @@ import { EditorComponent } from './forum/editor/editor.component';
       PostDetailComponent,
       TopicComponent,
       LikeModalComponent,
+      SectionPageComponent,
       SectionComponent
    ],
   imports: [
@@ -76,6 +79,7 @@ import { EditorComponent } from './forum/editor/editor.component';
   providers: [
     ForumDataResolver,
     LatestTopicsResolver,
+    SectionResolver,
     TopicResolver,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

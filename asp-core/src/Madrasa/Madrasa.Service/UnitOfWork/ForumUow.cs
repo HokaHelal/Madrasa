@@ -130,17 +130,18 @@ namespace Madrasa.Service.UnitOfWork
             return retLastTopics;
         }
 
-        public async Task<IEnumerable<TopicMainDto>> GetTopicBySectionIdAsync(int sectionId)
+        public async Task<SectionDto> GetSectionTopicsById(int sectionId, int classId)
         {
-            var userPosts = await _context.Topics
-                                            .Include(s => s.Section).Include(a => a.Author)
-                                            .Where(c => c.SectionId == sectionId)
-                                            .OrderByDescending(o => o.Created)
-                                            .ToListAsync();
+            var userPosts = await _context.Sections
+                                            .Include(s => s.Topics
+                                            .Where(x=> x.SectionId == sectionId && x.ClassId == classId)
+                                            .OrderByDescending(o => o.Created))
+                                            .ThenInclude(a => a.Author)
+                                            .FirstOrDefaultAsync(c => c.Id == sectionId);
 
-            var retLastTopics = _mapper.Map<IEnumerable<TopicMainDto>>(userPosts);
+            var retSectionDto = _mapper.Map<SectionDto>(userPosts);
 
-            return retLastTopics;
+            return retSectionDto;
         }
 
         public async Task<bool> ToggleLike(NewLikeDto newLike)

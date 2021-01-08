@@ -27,6 +27,8 @@ namespace Madrasa.Service.Helpers
                 .ForMember(dest => dest.photoUrl, opt => opt.MapFrom(src => src.AppUser.PhotoUrl))
                 ;
 
+            CreateMap<Section, SectionDto>()
+                .ForMember(dest => dest.topics, opt => opt.MapFrom(src => src.Topics));
             CreateMap<StudentDto, AppUser>()
                 .ForMember(dest => dest.RoleId, opt => opt
                 .MapFrom<StudentRoleResolver>());

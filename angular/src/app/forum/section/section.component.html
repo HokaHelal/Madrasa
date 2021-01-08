@@ -1,8 +1,12 @@
 <div class="col-lg">
-  <div class="card" [ngClass]="{ 'card-danger card-outline': isHighlighted }">
-    <div class="card-header" routerLink="section/{{ forumSection.id }}">
-      <h5 class="m-0">{{forumSection.name}}</h5>      
+  <div class="card card-outline" 
+      [ngClass]="{ 'card-primary': class === 'primary', 
+      'card-danger': class === 'danger',
+      'card-secondary': class === ''
+       }">
+    <div class="card-header" routerLink="section/{{ id }}">
+      <h5 class="m-0">{{title}}</h5>      
     </div>
-    <app-topic [topicsData]="forumSection.topics"></app-topic>
+    <app-topic [topicsData]="topics"></app-topic>
   </div>
 </div>

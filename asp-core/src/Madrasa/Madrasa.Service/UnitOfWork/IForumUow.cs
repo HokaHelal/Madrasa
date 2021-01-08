@@ -20,7 +20,7 @@ namespace Madrasa.Service.UnitOfWork
         Task<bool> TogglePinAsync(int topicId);
         Task<IEnumerable<PostDetailDto>> GetPostByAuthorIdAsync(int authorId);
         Task<IEnumerable<TopicMainDto>> GetLatestTopicsAsync(int classId, int lastTopicsNum = 5);
-        Task<IEnumerable<TopicMainDto>> GetTopicBySectionIdAsync(int sectionId);
+        Task<SectionDto> GetSectionTopicsById(int sectionId, int classId);
         Task<bool> ToggleLike(NewLikeDto newLike);
 
     }
