@@ -13,7 +13,7 @@ export class SectionPageComponent implements OnInit {
   pinnedThreads: TopicMain[];
   unpinnedThreads: TopicMain[];
   sectionName: string;
-
+  isEmpty = false;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -22,6 +22,8 @@ export class SectionPageComponent implements OnInit {
       this.sectionName = section.name;
       this.pinnedThreads = section.topics.filter(x => x.isPinned);
       this.unpinnedThreads = section.topics.filter(x => !x.isPinned);
+      
+      if(section.topics?.length == 0) this.isEmpty = true;
     });
   }
 

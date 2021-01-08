@@ -1,5 +1,7 @@
 <!-- Content Header (Page header) -->
 <app-content-header [title]="'Section'"></app-content-header>
+<ng-container *ngIf="!isEmpty">
+
 <div class="row px-1">
   <div class="col-lg">
     <button class="btn btn-md btn-success float-right" (click)="openNewThreadModal()">
@@ -22,3 +24,19 @@
     [topics]="unpinnedThreads"
   ></app-section>
 </div>
+</ng-container>
+  <div class="rtl emptyDiv"  *ngIf="isEmpty">
+    <img class="img-fluid rounded empty-img" src="../../../assets/img/empty.png" />
+    <div class="emptyText">
+      <p>No Threads exist yet ... start one now </p>
+      <div class="row px-1">
+        <div class="col-lg">
+          <button class="btn btn-md btn-success" (click)="openNewThreadModal()">
+            <i class="fas fa-plus-square mr-2"></i> <strong>New Thread</strong>
+          </button>
+        </div>
+      </div>
+      
+  </div>
+  </div>
+
