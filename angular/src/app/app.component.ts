@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
     if(user) {
       this.authService.setCurrentUser(user);
     }
+    else {
+      this.authService.notifyNoCurrentUser();
+    }
   }
 
 }

@@ -35,6 +35,10 @@ setCurrentUser(user: User) {
 
 logout() {
   localStorage.removeItem('user');
+  this.notifyNoCurrentUser();
+}
+
+notifyNoCurrentUser() {
   this.currentUserSource.next(null);
 }
 

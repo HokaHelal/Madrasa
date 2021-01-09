@@ -12,6 +12,7 @@ import { ThreadComponent } from './forum/thread/thread.component';
 import { TopicDetailComponent } from './forum/topic-detail/topic-detail.component';
 import { TopicComponent } from './forum/topic/topic.component';
 import { ContentMainComponent } from './theme/content/content-main/content-main.component';
+import { AuthGuard } from './_guards/auth.guard';
 import { ForumDataResolver } from './_resolvers/forumData.resolver';
 import { LatestTopicsResolver } from './_resolvers/latestTopics.resolver';
 import { SectionResolver } from './_resolvers/section.resolver';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'app', 
   runGuardsAndResolvers: 'always',
+  canActivate: [AuthGuard],
   component: ContentMainComponent ,
   children: [
     { path: '', component: DashboardComponent },
