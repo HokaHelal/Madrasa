@@ -9,6 +9,7 @@
 </div>
 <hr />
 <app-section 
+*ngIf="latestTopics.length > 0"
 [class]="'danger'"  
 [title]="'Latest Threads'"
 [topics]="latestTopics"

@@ -12,6 +12,7 @@
 <hr />
 <div class="row px-1">
   <app-section
+    *ngIf="pinnedThreads.length > 0"
     [class]="'primary'"
     [title]="'Pinned Threads'"
     [topics]="pinnedThreads"
