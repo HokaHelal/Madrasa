@@ -53,7 +53,7 @@ export class AddTopicModalComponent implements OnInit {
   get isFormsValid() {
     return this.newTopicForm.valid && this.editorComponent.editorForm.valid;
   }
-  
+
   addTopic() {      
       let newTopic: NewTopic = {
         title: this.title,
@@ -65,7 +65,7 @@ export class AddTopicModalComponent implements OnInit {
 
       this.forumService.addTopic(newTopic).subscribe((topicId : number) => {
           this.router.navigateByUrl('/app/forums/thread/' + topicId);
-          this.bsModalRef.hide();
+          this.bsModalRef.hide(); 
       })
   }
 }

@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core';
 import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { Topic } from 'src/app/_models/Topic';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ForumService } from 'src/app/_services/forum.service';
+import { EditorComponent } from '../editor/editor.component';
 
 @Component({
   selector: 'app-thread',
@@ -14,6 +16,8 @@ import { ForumService } from 'src/app/_services/forum.service';
   styleUrls: ['./thread.component.scss']
 })
 export class ThreadComponent implements OnInit, AfterViewInit {
+  @ViewChild('editor', {static: true}) editorComponent: EditorComponent; 
+
   topic: Topic;
   user: User;
 
@@ -46,11 +50,11 @@ export class ThreadComponent implements OnInit, AfterViewInit {
     
   }
 
-  onSubmit(reply: string) {
+  onSubmit() {
     let newPostId = 0;
     let newPost: NewPost = {
       authorId: this.user.userId,
-      content: reply,
+      content: this.editorComponent.content,
       topicId: this.topic.id
     };
 
@@ -62,12 +66,13 @@ export class ThreadComponent implements OnInit, AfterViewInit {
         created: new Date(),
         likes: [],
         authorId: newPost.authorId,
-        content: reply,
+        content: newPost.content,
         topicId: newPost.topicId,
         id: postId      
       }
 
       this.topic.posts.push(post);
+      this.editorComponent.onClear();
     })
     
   }

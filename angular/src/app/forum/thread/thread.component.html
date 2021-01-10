@@ -25,6 +25,14 @@
   <div class="card-header"><strong>Submit Reply</strong></div>
   <!-- /.card-header -->
   <div class="card-body">
-    <app-editor (Submit)="onSubmit($event)"></app-editor>
+    <app-editor #editor></app-editor>
+    <div class="text-right mt-3">
+      <button [disabled]="!editorComponent.editorForm.valid"     
+        (click)="onSubmit()"
+        class="btn btn-md btn-primary"
+      >
+        <i class="fas fa-paper-plane mr-2"></i> <strong>Submit</strong>
+      </button>
+    </div>
   </div>
   </div>
