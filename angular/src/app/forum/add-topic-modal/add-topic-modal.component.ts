@@ -24,7 +24,7 @@ export class AddTopicModalComponent implements OnInit {
    }
 
   sections: SectionMain[];
-  @Input() selectedSection: number = -1;
+  @Input() selectedSection: number = 0;
   user: User;
   isPinned: boolean = false;
   title: string = '';
@@ -36,7 +36,7 @@ export class AddTopicModalComponent implements OnInit {
   initControls() {
     this.forumService.getDropDownSections(this.user.classId).subscribe((sections: SectionMain[]) => {
       this.sections = sections;
-      if(sections.length > 0 && this.selectedSection == -1) {
+      if(sections.length > 0 && this.selectedSection == 0) {
         this.selectedSection = sections[0].id;
       }
     });
