@@ -1,3 +1,4 @@
+<form [formGroup]="newTopicForm" >
 <div class="modal-header">
   <strong> New Thread </strong>
   <button
@@ -14,6 +15,8 @@
     <input
       class="form-control form-control-lg mb-2"
       type="text"
+      name="title"
+      formControlName="title"
       [(ngModel)]="title"
       placeholder="title..."
     />
@@ -22,6 +25,7 @@
       <select
         class="form-control col-9"
         [(ngModel)]="selectedSection"
+        formControlName="section"
         name="selectedSectionId"
       >
         <option
@@ -46,6 +50,15 @@
         >
       </div>
     </div>
-    <app-editor (Submit)="addTopic($event)"></app-editor>
+    <app-editor #editor></app-editor>
+    <div class="text-right mt-3">
+      <button [disabled]="!isFormsValid"     
+        (click)="addTopic()"
+        class="btn btn-md btn-primary"
+      >
+        <i class="fas fa-paper-plane mr-2"></i> <strong>Submit</strong>
+      </button>
+    </div>
   </div>
 </div>
+</form>

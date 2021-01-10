@@ -1,32 +1,81 @@
-<form [formGroup]="editForm">
-  <quill-editor [modules]="modules" formControlName="editor"></quill-editor>
+<form [formGroup]="editorForm">
+  <quill-editor [modules]="modules" name="editor"  
+  formControlName="editor" [required]="true">
+    <div quill-editor-toolbar>
+      <span class="ql-formats">
+        <button class="ql-bold" [title]="'Bold'"></button>
+        <button class="ql-italic" [title]="'Italic'"></button>
+        <button class="ql-underline" [title]="'Underline'"></button>
+        <button class="ql-strike" [title]="'Strike'"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-blockquote" [title]="'Blockquote'"></button>
+        <button class="ql-code-block" [title]="'Code-block'"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-list" [title]="'Ordered'" value="ordered"></button>
+        <button class="ql-list" [title]="'Code-Bullet'" value="bullet"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-script" [title]="'Sub'" value="sub"></button>
+        <button class="ql-script" [title]="'Super'" value="super"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-indent" [title]="'IntendP'" value="-1"></button>
+        <button class="ql-indent" [title]="'IntendM'" value="+1"></button>
+      </span>
+      <span class="ql-formats">
+        <select class="ql-color" [title]="'Color'"></select>
+        <select class="ql-background" [title]="'BackgroundColor'"></select>
+      </span>
+      <span class="ql-formats">
+        <button
+          class="ql-direction ql-active"
+          [title]="'Direction'"
+          value="rtl"
+        ></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-align" [title]="'Aligment Left'" value=""></button>
+        <button class="ql-align" [title]="'Aligment Center'" value="center"></button>
+        <button class="ql-align" [title]="'Aligment Right'" value="right"></button>
+        <button class="ql-align" [title]="'Aligment Justify'" value="justify"></button>      
+      </span>
+       <span class="ql-formats">
+        <button class="ql-header" [title]="'Header1'" value="1"></button>
+        <button class="ql-header" [title]="'Header2'" value="2"></button>
+      </span>     
+      <span class="ql-formats">
+        <select class="ql-font" [title]="'Fonts'">
+        </select>
+        <select class="ql-size" [title]="'FontSize'">
+        </select>
+		<button class="ql-clean" [title]="'Clean'"></button>
+      </span>	  
+      <span class="ql-formats">
+        <button class="ql-link" [title]="'Link'"></button>
+        <button class="ql-image" [title]="'Image'"></button>
+        <button class="ql-video" [title]="'Video'"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-emoji" [title]="'Emoji'"></button>
+      </span>
+      <span class="ql-formats">
+        <button [disabled]="!editorForm.valid" (click)="onClear()" [title]="'Clear'">
+          <i class="fas fa-eraser text-danger" [class.text-muted]="!editorForm.valid"></i>
+        </button>
+        <button [disabled]="!editorForm.valid" (click)="onPreview()" [title]="'Preview'">
+          <i class="fa fa-eye text-success"  [class.text-muted]="!editorForm.valid"></i>
+        </button>
+      </span>
+    </div>
+  </quill-editor>
   <div
     style="background-color: #f7fbfd"
     *ngIf="previewReply"
-    class="border mt-1">
-    <quill-view-html [content]="previewReply" theme="snow"></quill-view-html> 
+    class="border mt-1"
+  >
+    <quill-view-html [content]="previewReply" theme="snow"></quill-view-html>
   </div>
-  <div class="text-right mt-3">
-    <button
-      [disabled]="!editForm.valid"
-      (click)="onPreview()"
-      class="btn btn-md bg-teal mr-1"
-    >
-      <i class="fas fa-eye mr-2"></i> <strong>Preivew</strong>
-    </button>
-    <button
-      [disabled]="!editForm.valid"
-      (click)="onClear()"
-      class="btn btn-md btn-danger mr-1"
-    >
-      <i class="fas fa-eraser mr-2"></i> <strong>Clear</strong>
-    </button>
-    <button
-      [disabled]="!editForm.valid"
-      (click)="onSubmit()"
-      class="btn btn-md btn-primary"
-    >
-      <i class="fas fa-paper-plane mr-2"></i> <strong>Submit</strong>
-    </button>
-  </div>
+ 
 </form>
