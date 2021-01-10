@@ -1,8 +1,6 @@
+import { SectionMain } from "./SectionMain";
 import { TopicMain } from "./TopicMain";
 
-
-export interface Section {
-    id: number;
-    name: string;
+export class Section extends SectionMain {
     topics: TopicMain[];
 }

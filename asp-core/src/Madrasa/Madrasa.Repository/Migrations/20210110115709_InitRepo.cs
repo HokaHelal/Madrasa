@@ -37,20 +37,6 @@ namespace Madrasa.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sections",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNum = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sections", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
@@ -111,6 +97,9 @@ namespace Madrasa.Repository.Migrations
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleId = table.Column<int>(type: "int", nullable: false),
                     UserRolesId = table.Column<int>(type: "int", nullable: true),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    ManagerId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -288,6 +277,27 @@ namespace Madrasa.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sections",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderNum = table.Column<int>(type: "int", nullable: false),
+                    ClassId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sections_Classes_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -319,9 +329,9 @@ namespace Madrasa.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SectionId = table.Column<int>(type: "int", nullable: false),
                     IsPinned = table.Column<bool>(type: "bit", nullable: false),
-                    ClassId = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false)
@@ -334,12 +344,6 @@ namespace Madrasa.Repository.Migrations
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Topics_Classes_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Classes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Topics_Sections_SectionId",
                         column: x => x.SectionId,
@@ -485,7 +489,8 @@ namespace Madrasa.Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Managers_AppUserId",
                 table: "Managers",
-                column: "AppUserId");
+                column: "AppUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_AuthorId",
@@ -498,9 +503,15 @@ namespace Madrasa.Repository.Migrations
                 column: "TopicId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sections_ClassId",
+                table: "Sections",
+                column: "ClassId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_AppUserId",
                 table: "Students",
-                column: "AppUserId");
+                column: "AppUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_ClassId",
@@ -510,7 +521,8 @@ namespace Madrasa.Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Teachers_AppUserId",
                 table: "Teachers",
-                column: "AppUserId");
+                column: "AppUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teachers_SubjectId",
@@ -521,11 +533,6 @@ namespace Madrasa.Repository.Migrations
                 name: "IX_Topics_AuthorId",
                 table: "Topics",
                 column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Topics_ClassId",
-                table: "Topics",
-                column: "ClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Topics_SectionId",
@@ -581,13 +588,13 @@ namespace Madrasa.Repository.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Classes");
-
-            migrationBuilder.DropTable(
                 name: "Sections");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Classes");
 
             migrationBuilder.DropTable(
                 name: "Grades");

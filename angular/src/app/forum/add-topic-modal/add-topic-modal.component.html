@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <strong> New Thread </strong>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card-body p-0">
+    <input
+      class="form-control form-control-lg mb-2"
+      type="text"
+      [(ngModel)]="title"
+      placeholder="title..."
+    />
+    <div class="form-inline mb-2">
+      <label class="col-1">Section</label>
+      <select
+        class="form-control col-9"
+        [(ngModel)]="selectedSection"
+        name="selectedSectionId"
+      >
+        <option
+          *ngFor="let section of sections"
+          [value]="section.id"
+          class="dropdown-item"
+        >
+          {{ section.name }}
+        </option>
+      </select>
+      <div class="form-control custom-control custom-switch col-2">
+        <input
+          [checked]="isPinned"
+          value="isPinned"
+          (change)="isPinned = !isPinned"
+          type="checkbox"
+          class="custom-control-input"
+          id="customSwitch1"
+        />
+        <label class="custom-control-label ml-1 text-muted" for="customSwitch1"
+          >Pinned</label
+        >
+      </div>
+    </div>
+    <app-editor (Submit)="addTopic($event)"></app-editor>
+  </div>
+</div>

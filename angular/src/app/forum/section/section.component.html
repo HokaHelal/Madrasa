@@ -7,6 +7,13 @@
     <div class="card-header" routerLink="section/{{ id }}">
       <h5 class="m-0">{{title}}</h5>      
     </div>
-    <app-topic [topicsData]="topics"></app-topic>
+    <app-topic *ngIf="topics.length != 0" [topicsData]="topics"></app-topic>
+    <div *ngIf="topics.length == 0" class="emptyDiv"> 
+        <img class="img-fluid rounded empty-img" src="../../../assets/img/clean.png" />
+        <span class="emptyText">
+          <p style="display: inline;">No Threads here ... start </p>
+          <a  (click)="openModal(id);" class="link">New Thread</a>
+          <p style="display: inline;"> ?</p>
+    </span>
   </div>
 </div>

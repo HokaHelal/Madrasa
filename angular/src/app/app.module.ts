@@ -37,6 +37,8 @@ import { ThreadComponent } from './forum/thread/thread.component';
 import { EditorComponent } from './forum/editor/editor.component';
 import { SectionResolver } from './_resolvers/section.resolver';
 import { SectionPageComponent } from './forum/section-page/section-page.component';
+import { AddTopicModalComponent } from './forum/add-topic-modal/add-topic-modal.component';
+import { TextPipe } from './_pipes/text.pipe';
 
 @NgModule({
   declarations: [			
@@ -61,7 +63,9 @@ import { SectionPageComponent } from './forum/section-page/section-page.componen
       TopicComponent,
       LikeModalComponent,
       SectionPageComponent,
-      SectionComponent
+      AddTopicModalComponent,
+      SectionComponent,
+      TextPipe
    ],
   imports: [
     CommonModule,

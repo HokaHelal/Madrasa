@@ -5,8 +5,10 @@ import { environment } from 'src/environments/environment';
 import { Forum } from '../_models/Forum';
 import { NewLike } from '../_models/newLike';
 import { NewPost } from '../_models/NewPost';
+import { NewTopic } from '../_models/NewTopic';
 import { Post } from '../_models/Post';
 import { Section } from '../_models/Section';
+import { SectionMain } from '../_models/SectionMain';
 import { Topic } from '../_models/Topic';
 import { TopicMain } from '../_models/TopicMain';
 
@@ -57,6 +59,13 @@ export class ForumService {
     );
   }
 
+  getDropDownSections(classId: number) {
+    return this.httpClient.get<SectionMain[]>(
+      environment.baseUrl + 'forum/sections/' + classId,
+      {}
+    );
+  }
+
   getTopicsByAuthorId(authorId: number) {
     return this.httpClient.get<Post>(
       environment.baseUrl + 'forum/topic/profile/' + authorId,
@@ -64,7 +73,7 @@ export class ForumService {
     );
   }
 
-  addTopic(topic: TopicMain) {
+  addTopic(topic: NewTopic) {
     return this.httpClient.post(
       environment.baseUrl + 'forum/new-topic/',
       topic

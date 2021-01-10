@@ -7,6 +7,6 @@ namespace Madrasa.Models
     {
         public int GradeId { get; set; }
         public Grade Grade { get; set; }
-        public ICollection<Topic> Topics { get; set; }
+        public ICollection<Section> Sections { get; set; }
     }
 }

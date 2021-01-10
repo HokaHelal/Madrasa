@@ -5,7 +5,6 @@ export interface Topic {
     id: number;
     sectionName: string;
     isPinned: boolean;
-    className: string;
     title: string;
     content: string;
     authorId: number;

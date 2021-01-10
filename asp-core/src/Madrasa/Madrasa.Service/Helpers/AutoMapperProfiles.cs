@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Madrasa.Service.Helpers
 {
@@ -27,6 +28,8 @@ namespace Madrasa.Service.Helpers
                 .ForMember(dest => dest.photoUrl, opt => opt.MapFrom(src => src.AppUser.PhotoUrl))
                 ;
 
+            CreateMap<Section, SectionMainDto>();
+
             CreateMap<Section, SectionDto>()
                 .ForMember(dest => dest.topics, opt => opt.MapFrom(src => src.Topics));
             CreateMap<StudentDto, AppUser>()
@@ -37,7 +40,26 @@ namespace Madrasa.Service.Helpers
             CreateMap<Topic, TopicMainDto>()
               .ForMember(dest => dest.authorId, opt => opt.MapFrom(src => src.Author.Id))
               .ForMember(dest => dest.authorName, opt => opt.MapFrom(src => src.Author.Name))
-              .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl));
+              .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl))
+              .ForMember(dest => dest.postsCount, opt => opt.MapFrom(src => src.Posts.Count))
+
+              .ForMember(dest => dest.lastActive, opt =>
+              {
+                  opt.MapFrom(src => (src.Posts != null && src.Posts.Count > 0) ?
+                  src.Posts.OrderByDescending(o => o.Created).FirstOrDefault().Created : DateTime.MinValue);
+              })
+              .ForMember(dest => dest.lastPostId, opt =>
+              {
+                  opt.MapFrom(src => (src.Posts != null && src.Posts.Count > 0 ) ?
+                  src.Posts.OrderByDescending(o => o.Created).FirstOrDefault().Id : 0);
+              })
+              .ForMember(dest => dest.lastPostBy, opt =>
+              {
+                  opt.MapFrom(src => (src.Posts != null && src.Posts.Count > 0) ?
+                  src.Posts.OrderByDescending(o => o.Created).FirstOrDefault().Author.UserName : string.Empty);
+              })
+              .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl))
+              ;
 
             CreateMap<NewPostDto, Post>();
             CreateMap<NewTopicDto, Topic>();

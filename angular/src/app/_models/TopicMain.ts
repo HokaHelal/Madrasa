@@ -7,4 +7,9 @@ export interface TopicMain {
     authorPhoto: string;
     created: string;
     content: string;
+    lastActive: Date;
+    lastPostId: number;
+    lastPostBy: string;
+    postsCount: number;
+
 }

@@ -1,22 +1,32 @@
 <div class="modal-header">
-  <strong> {{topicLikes.length}} users like this </strong>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+  <strong> {{ topicLikes.length }} users like this </strong>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-      <div class="card-body table-responsive p-0">
-        <table class="table table-striped table-valign-middle">
-          <thead>         
-          </thead>
-          <tbody>
-          <tr *ngFor="let like of topicLikes">
-            <td style="width: 20%;">
-              <img src="{{like.photoUrl}}" alt="{{like.name}}"
-               class="img-circle img-size-32 mr-2">
-            </td>
-            <td class="user-block username font-weight-bold"><a href="#"> {{like.name}}</a></td>            
-          </tr>
-          </tbody>
-        </table>
+  <div class="card-body table-responsive p-0">
+    <table class="table table-striped table-valign-middle">
+      <thead></thead>
+      <tbody>
+        <tr *ngFor="let like of topicLikes">
+          <td style="width: 20%">
+            <img
+              src="{{ like.photoUrl }}"
+              alt="{{ like.name }}"
+              class="img-circle img-size-32 mr-2"
+            />
+          </td>
+          <td class="user-block username font-weight-bold">
+            <a href="#"> {{ like.name }}</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

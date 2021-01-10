@@ -77,16 +77,21 @@ namespace Madrasa.Service.UnitOfWork
         {
             var userPosts = await _context.Sections
                                        .Include(t => t.Topics
-                                                      .Where(c => c.ClassId == classId)
+                                                      .Take(lastTopicsNum)
+                                                      .OrderByDescending(o => o.Created))
+                                       .ThenInclude(p => p.Posts)
+                                       .ThenInclude(p => p.Author)
+                                       .Include(t => t.Topics
                                                       .Take(lastTopicsNum)
                                                       .OrderByDescending(o => o.Created))
                                        .ThenInclude(a => a.Author)
+                                       .Where(c => c.ClassId == classId)
                                        .OrderBy(o => o.OrderNum)
                                        .ToListAsync();
+            
+            var retMainForum = _mapper.Map<IEnumerable<MainForumDto>>(userPosts);
 
-            var reMainForum = _mapper.Map<IEnumerable<MainForumDto>>(userPosts);
-
-            return reMainForum;
+            return retMainForum;
         }
 
         public async Task<bool> TogglePinAsync(int topicId)
@@ -120,7 +125,8 @@ namespace Madrasa.Service.UnitOfWork
         {
             var userPosts = await _context.Topics
                                   .Include(s=>s.Section).Include(a => a.Author)
-                                  .Where(c => c.ClassId == classId)
+                                  .Include(p => p.Posts).ThenInclude(p => p.Author)
+                                  .Where(x => x.Section.ClassId == classId)
                                   .Take(lastTopicsNum)
                                   .OrderByDescending(o => o.Created)
                                   .ToListAsync();
@@ -133,13 +139,24 @@ namespace Madrasa.Service.UnitOfWork
         public async Task<SectionDto> GetSectionTopicsById(int sectionId, int classId)
         {
             var userPosts = await _context.Sections
-                                            .Include(s => s.Topics
-                                            .Where(x=> x.SectionId == sectionId && x.ClassId == classId)
-                                            .OrderByDescending(o => o.Created))
+                                            .Include(s => s.Topics.Where(x=> x.SectionId == sectionId)
+                                                .OrderByDescending(o => o.Created))
                                             .ThenInclude(a => a.Author)
-                                            .FirstOrDefaultAsync(c => c.Id == sectionId);
+                                            .Include(s => s.Topics.Where(x => x.SectionId == sectionId)
+                                                .OrderByDescending(o => o.Created))
+                                            .ThenInclude(a => a.Posts).ThenInclude(a => a.Author)
+                                            .FirstOrDefaultAsync(c => c.Id == sectionId && c.ClassId == classId);
 
             var retSectionDto = _mapper.Map<SectionDto>(userPosts);
+
+            return retSectionDto;
+        }
+        public async Task<IEnumerable<SectionMainDto>> GetSectionsDropDown(int classId)
+        {
+            var sections = await _context.Sections.OrderBy(o=>o.OrderNum)                                            
+                                            .Where(x => x.ClassId == classId).ToListAsync();
+
+            var retSectionDto = _mapper.Map<IEnumerable<SectionMainDto>>(sections);
 
             return retSectionDto;
         }

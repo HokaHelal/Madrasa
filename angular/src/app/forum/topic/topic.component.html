@@ -2,46 +2,64 @@
   <thead>
     <tr>
       <th style="width: 1%"></th>
-      <th style="width: 40%"></th>
+      <th style="width: 38%"></th>
       <th style="width: 20%"></th>
-      <th></th>
-      <th style="width: 10%" class="text-center"></th>
+      <th style="width: 23%"></th>
     </tr>
   </thead>
   <tbody>
-    <tr class="link" *ngFor="let topicData of topicsData"  routerLink="/app/forums/thread/{{ topicData.id }}">
+    <tr
+      class="link px-1"
+      *ngFor="let topicData of topicsData"
+      routerLink="/app/forums/thread/{{ topicData.id }}"
+    >
       <td>
-        <i *ngIf="topicData.isPinned" style="color: #990000;" class="fas fa-thumbtack"></i>
+        <i
+          *ngIf="topicData.isPinned"
+          style="color: #990000"
+          class="fas fa-thumbtack"
+        ></i>
       </td>
       <td>
-          <a style="font-weight: bold;">
-              {{topicData.title}}
-          </a>
-          <br/>
-          <small>
-            {{topicData.content | slice:0:100 }}...
-          </small>
+        <a style="font-weight: bold">
+          {{ topicData.title }}
+        </a>
+        <br />
+        <small> {{ topicData.content | text |  slice: 0:100 }}... </small>
       </td>
       <td>
-          <ul class="list-inline">        
-              <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="{{topicData.authorPhoto}}">
-              </li>
-              <li class="list-inline-item">
-                {{topicData.authorName}}
-              </li>
-          </ul>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <img
+              alt="Avatar"
+              class="table-avatar"
+              src="{{ topicData.authorPhoto }}"
+            />
+          </li>
+          <li class="list-inline-item">
+            {{ topicData.authorName }}
+          </li>
+        </ul>
       </td>
       <td class="project_progress">
-         <small style="font-weight: bold;">Created: </small>
-         <small>{{topicData.created | date:'medium'}}</small>
-      <br/>
-      <small style="font-weight: bold;">Last Active: </small>
-      <small>{{topicData.created | date:'medium'}}</small>
+        <small style="font-weight: bold">Created: </small>
+        <small>{{ topicData.created | date: "medium" }}</small>
+        <br />
+        <small style="font-weight: bold">Last Active: </small>
+        <small>{{ topicData.lastActive | date: "medium" }}</small>
       </td>
-      <td class="project-state">
-          <span class="badge badge-success">Success</span>
+      <td class="project_progress" *ngIf="topicData.postsCount > 0">
+        <small><i class="fas fa-comments mr-2"></i>{{ topicData.postsCount }} Posts </small>
+        <br />
+        <small style="font-weight: bold">Last Post By: </small>
+        <a (click)="stop($event)" routerLink="/app/forums/thread/{{ topicData.id }}" 
+        fragment="P{{topicData.lastPostId}}"><small>{{ topicData.lastPostBy}}</small></a>
+        
       </td>
-     
-      </tr>  </tbody>
+      <td class="project_progress" *ngIf="topicData.postsCount == 0">
+        <small>No Posts yet .. be <a (click)="stop($event)" routerLink="/app/forums/thread/{{ topicData.id }}" 
+          fragment="editor">first</a> </small>        
+      </td>
+    </tr>
+  </tbody>
 </table>

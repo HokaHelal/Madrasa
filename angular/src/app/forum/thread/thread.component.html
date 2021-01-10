@@ -11,16 +11,20 @@
    </div>
 </div>
 
-<div class="card  mx-2" style="background-color: #f7fbfd">
+<div class="card  mx-2">
   <div class="card-header"></div>
   <!-- /.card-header -->
-  <div class="card-body">
-    <app-post-detail
-      *ngFor="let post of topic.posts"
+  <div class="card-body" id="P{{post.id}}" *ngFor="let post of topic.posts" class="normal">
+    <app-post-detail       
       [postData]="post"
     ></app-post-detail>
   </div>
 </div>
-<div class="mx-2" >
-  <app-editor (Submit)="onSubmit($event)"></app-editor>
-</div>
+
+<div class="card mx-2" id="editor">
+  <div class="card-header"><strong>Submit Reply</strong></div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <app-editor (Submit)="onSubmit($event)"></app-editor>
+  </div>
+  </div>

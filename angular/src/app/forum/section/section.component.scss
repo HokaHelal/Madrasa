@@ -1,0 +1,28 @@
+.empty-img {
+    height: 30px;
+    width: auto;
+}
+.emptyDiv {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    text-align: left;
+    justify-content: center;
+   }
+  
+   .emptyText {
+       margin-left: 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+   }
+
+.link {
+    cursor:pointer;
+    color:#007bff;
+    text-decoration:underline;
+}
+
+.link:hover {
+    text-decoration:none;
+    text-shadow: 1px 1px 1px #555;
+}

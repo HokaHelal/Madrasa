@@ -13,8 +13,6 @@ namespace Madrasa.Models
         public int SectionId { get; set; }
         public Section Section { get; set; }
         public bool IsPinned { get; set; }
-        public int ClassId { get; set; }
-        public Class Class { get; set; }
         public ICollection<Post> Posts { get; set; }
     }
 }

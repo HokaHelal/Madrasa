@@ -1,8 +1,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
-      <img src="../../assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a routerLink="/app" class="brand-link">
+      <img src="../../assets/img/logo.png" alt="Madrasa Logo" class="brand-image img-circle">
       <span class="brand-text font-weight-light">Madrasa</span>
     </a>
 
@@ -35,7 +35,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                <br /> with font-awesome or any other icon font library -->
-               <li class="nav-item">
+
+               <!-- <li class="nav-item">
                 <a routerLink="./" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
@@ -43,22 +44,23 @@
                     <span class="right badge badge-danger">Soon</span>
                   </p>
                 </a>
-              </li>
+              </li> -->
           <li class="nav-header">SOCIAL</li>
-          <li class="nav-item">
-            <a routerLink="./classmates" class="nav-link">
-              <i class="nav-icon fas fa-users"></i><p>Classmates</p></a>
-          </li>
           <li class="nav-item">
             <a routerLink="./forums" class="nav-link">
               <i class="nav-icon fas fa-align-justify"></i><p>Forums</p></a>
           </li>
           <li class="nav-item">
+            <a routerLink="./classmates" class="nav-link">
+              <i class="nav-icon fas fa-users"></i><p>Classmates</p></a>
+          </li>
+         
+          <!-- <li class="nav-item">
             <a routerLink="./classroom" class="nav-link">
               <i class="nav-icon fas fa-chalkboard"></i><p>Class
                 <span class="right badge badge-warning">LIVE</span>
               </p></a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

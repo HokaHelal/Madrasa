@@ -117,5 +117,12 @@ namespace Madrasa.API.Controllers
             return Ok(isLiked);
         }
 
+        [HttpGet("sections/{classId}")]
+        public async Task<IActionResult> GetSectionsDropDown(int classId)
+        {
+            var sections = await _unitOfWork.GetSectionsDropDown(classId);
+
+            return Ok(sections);
+        }
     }
 }

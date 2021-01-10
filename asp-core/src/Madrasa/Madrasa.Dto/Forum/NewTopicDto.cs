@@ -10,7 +10,6 @@ namespace Madrasa.Dto
     {
         public int sectionId { get; set; }
         public bool isPinned { get; set; }
-        public int classId { get; set; }
         public string title { get; set; }
         public string content { get; set; }
         public int authorId { get; set; }

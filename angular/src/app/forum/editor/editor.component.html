@@ -1,33 +1,32 @@
 <form [formGroup]="editForm">
-
-  <div class="card">
-    <div class="card-header"><strong>Submit Reply</strong></div>
-    <!-- /.card-header -->
-    <div class="card-body">
-      <quill-editor [modules]="modules" 
-                    formControlName="editor"
-      ></quill-editor>
-      <div style="background-color: #f7fbfd" *ngIf="previewReply"
-      class="border mt-1">
-      <quill-view-html 
-      [content]="previewReply"
-      theme="snow"></quill-view-html>
-    </div>
-      
-    </div>
-    <div class="card-footer">
-      <div class="text-right">
-        <button [disabled]="!editForm.valid" (click)="onPreview()" class="btn btn-md bg-teal mr-1">
-          <i class="fas fa-eye mr-2"></i> <strong>Preivew</strong> 
-        </button>
-        <button [disabled]="!editForm.valid" (click)="onClear()" class="btn btn-md btn-danger mr-1">
-          <i class="fas fa-eraser mr-2"></i> <strong>Clear</strong> 
-        </button>
-        <button [disabled]="!editForm.valid" (click)="onSubmit()" class="btn btn-md btn-primary">
-          <i class="fas fa-paper-plane mr-2"></i> <strong>Submit</strong> 
-        </button>
-      </div>
-    </div>
+  <quill-editor [modules]="modules" formControlName="editor"></quill-editor>
+  <div
+    style="background-color: #f7fbfd"
+    *ngIf="previewReply"
+    class="border mt-1">
+    <quill-view-html [content]="previewReply" theme="snow"></quill-view-html> 
   </div>
-  </form>
-  
+  <div class="text-right mt-3">
+    <button
+      [disabled]="!editForm.valid"
+      (click)="onPreview()"
+      class="btn btn-md bg-teal mr-1"
+    >
+      <i class="fas fa-eye mr-2"></i> <strong>Preivew</strong>
+    </button>
+    <button
+      [disabled]="!editForm.valid"
+      (click)="onClear()"
+      class="btn btn-md btn-danger mr-1"
+    >
+      <i class="fas fa-eraser mr-2"></i> <strong>Clear</strong>
+    </button>
+    <button
+      [disabled]="!editForm.valid"
+      (click)="onSubmit()"
+      class="btn btn-md btn-primary"
+    >
+      <i class="fas fa-paper-plane mr-2"></i> <strong>Submit</strong>
+    </button>
+  </div>
+</form>

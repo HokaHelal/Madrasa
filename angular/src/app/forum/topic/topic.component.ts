@@ -12,5 +12,7 @@ export class TopicComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  stop(event: Event) {
+    event.stopPropagation();
+  }
 }

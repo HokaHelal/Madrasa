@@ -22,6 +22,7 @@ namespace Madrasa.Service.UnitOfWork
         Task<IEnumerable<TopicMainDto>> GetLatestTopicsAsync(int classId, int lastTopicsNum = 5);
         Task<SectionDto> GetSectionTopicsById(int sectionId, int classId);
         Task<bool> ToggleLike(NewLikeDto newLike);
+        Task<IEnumerable<SectionMainDto>> GetSectionsDropDown(int classId);
 
     }
 }

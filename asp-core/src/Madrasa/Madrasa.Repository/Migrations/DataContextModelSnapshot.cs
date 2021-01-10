@@ -271,6 +271,9 @@ namespace Madrasa.Repository.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -278,6 +281,8 @@ namespace Madrasa.Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Sections");
                 });
@@ -368,9 +373,6 @@ namespace Madrasa.Repository.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -389,8 +391,6 @@ namespace Madrasa.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("ClassId");
 
                     b.HasIndex("SectionId");
 
@@ -578,6 +578,17 @@ namespace Madrasa.Repository.Migrations
                     b.Navigation("Topic");
                 });
 
+            modelBuilder.Entity("Madrasa.Models.Section", b =>
+                {
+                    b.HasOne("Madrasa.Models.Class", "Class")
+                        .WithMany("Sections")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
             modelBuilder.Entity("Madrasa.Models.Student", b =>
                 {
                     b.HasOne("Madrasa.Models.AppUser", "AppUser")
@@ -624,12 +635,6 @@ namespace Madrasa.Repository.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Madrasa.Models.Class", "Class")
-                        .WithMany("Topics")
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Madrasa.Models.Section", "Section")
                         .WithMany("Topics")
                         .HasForeignKey("SectionId")
@@ -637,8 +642,6 @@ namespace Madrasa.Repository.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
-
-                    b.Navigation("Class");
 
                     b.Navigation("Section");
                 });
@@ -714,7 +717,7 @@ namespace Madrasa.Repository.Migrations
 
             modelBuilder.Entity("Madrasa.Models.Class", b =>
                 {
-                    b.Navigation("Topics");
+                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("Madrasa.Models.Grade", b =>

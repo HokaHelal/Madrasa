@@ -20,14 +20,14 @@ import { TopicResolver } from './_resolvers/Topic.resolver';
 
 const routes: Routes = [
   
-  { path: '', redirectTo: '/app', pathMatch: 'full'  },
+  { path: '', redirectTo: '/app/forums', pathMatch: 'full'  },
   { path: 'login', component: LoginComponent },
   { path: 'app', 
   runGuardsAndResolvers: 'always',
   canActivate: [AuthGuard],
   component: ContentMainComponent ,
   children: [
-    { path: '', component: DashboardComponent },
+    { path: '',  component: DashboardComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'classroom', component: ClassRoomComponent },
     { path: 'classmates', component: ClassMatesComponent },
