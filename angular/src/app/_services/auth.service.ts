@@ -4,6 +4,7 @@ import { User } from '../_models/user';
 import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
   
-constructor(private httpClient: HttpClient) { }
+constructor(private httpClient: HttpClient, private router: Router) { }
 
 login(model: User) {
   return this.httpClient.post(environment.baseUrl + 'account/login', model).pipe(
@@ -36,6 +37,7 @@ setCurrentUser(user: User) {
 logout() {
   localStorage.removeItem('user');
   this.notifyNoCurrentUser();
+  this.router.navigateByUrl('/');
 }
 
 notifyNoCurrentUser() {
