@@ -39,6 +39,7 @@ import { SectionResolver } from './_resolvers/section.resolver';
 import { SectionPageComponent } from './forum/section-page/section-page.component';
 import { AddTopicModalComponent } from './forum/add-topic-modal/add-topic-modal.component';
 import { TextPipe } from './_pipes/text.pipe';
+import {BreadcrumbModule} from 'angular-crumbs';
 
 @NgModule({
   declarations: [			
@@ -70,6 +71,7 @@ import { TextPipe } from './_pipes/text.pipe';
   imports: [
     CommonModule,
     BrowserModule,
+    BreadcrumbModule,
     ModalModule.forRoot(),
     QuillModule.forRoot(),
     ToastrModule.forRoot({

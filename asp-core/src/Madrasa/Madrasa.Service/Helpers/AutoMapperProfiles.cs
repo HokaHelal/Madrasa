@@ -56,7 +56,7 @@ namespace Madrasa.Service.Helpers
               .ForMember(dest => dest.lastPostBy, opt =>
               {
                   opt.MapFrom(src => (src.Posts != null && src.Posts.Count > 0) ?
-                  src.Posts.OrderByDescending(o => o.Created).FirstOrDefault().Author.UserName : string.Empty);
+                  src.Posts.OrderByDescending(o => o.Created).FirstOrDefault().Author.Name : string.Empty);
               })
               .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl))
               ;
