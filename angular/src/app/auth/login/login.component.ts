@@ -16,10 +16,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  loginAs(username: string) {
+      this.model = { username: username, password: 'Password'};
+      this.login();
+  }
   login() {
     this.accountService.login(this.model).subscribe( res => {
-      console.log(res);
-      this.router.navigateByUrl('/app');
+      this.router.navigateByUrl('/app/forums');
   });
   }
 

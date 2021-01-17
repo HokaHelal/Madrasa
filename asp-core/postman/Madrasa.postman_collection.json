@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "a6e37d06-e05e-45fa-8d22-783cab27a8e8",
+		"name": "Madrasa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "LogIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('username');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"helmy\",\r\n    \"password\" : \"Password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewStudent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\":\"Mahmoud Meligi\",\r\n  \"userName\": \"Mego\",\r\n  \"password\": \"Password\",\r\n  \"classid\" : 3,\r\n  \"email\" : \"p@p.p\",\r\n  \"dateOfBirth\": \"1980-01-21T00:00:00\",\r\n  \"gender\": \"male\",\r\n  \"photoUrl\": \"https://randomuser.me/api/portraits/men/33.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Account/new-student",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"new-student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNewTeacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\":\"Mahmoud Yasen\",\r\n  \"userName\": \"Yasso\",\r\n  \"password\": \"Password\",\r\n  \"subjectId\" : 1,\r\n  \"email\" : \"q@q.q\",\r\n  \"dateOfBirth\": \"1951-01-21T00:00:00\",\r\n  \"gender\": \"male\",\r\n  \"photoUrl\": \"https://randomuser.me/api/portraits/men/32.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Account/new-teacher",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"new-teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllStudents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Account",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClassmates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Student/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Student",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forum",
+			"item": [
+				{
+					"name": "GetTopicById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/forum/topic/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostByAuthorId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/forum/post/profile/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"post",
+								"profile",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TogglePin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/forum/topic/2/toggle-pin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"2",
+								"toggle-pin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTopicByClassId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/forum/topic/class/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"class",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSectionsDropDown",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/forum/sections/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"sections",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ToggleLike",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "threadId",
+								"value": "2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "isTopic",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "userId",
+								"value": "3",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/forum/topic/toggle-like?userId=3&threadId=2&isTopic=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"toggle-like"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "threadId",
+									"value": "2"
+								},
+								{
+									"key": "isTopic",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMainForum",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/forum/topic/class/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"class",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLatestTopics",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/forum/topic/1/get-latest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"1",
+								"get-latest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTopicsBySectionId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/forum/topic/2/get-latest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"forum",
+								"topic",
+								"2",
+								"get-latest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NewTopic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\":\"Lorem Ipsum - 3\",\r\n  \"sectionId\": 1,\r\n  \"isPinned\": false,\r\n  \"classId\": 2,\r\n  \"content\": \"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.\",\r\n  \"authorId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Forum/new-topic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Forum",
+								"new-topic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NewPost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"content\": \"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\",\r\n  \"topicId\": 1,\r\n  \"authorId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Forum/new-post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Forum",
+								"new-post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://localhost:44370"
+		}
+	]
+}

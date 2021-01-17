@@ -40,7 +40,11 @@ namespace Madrasa.Repository.Account
 
         public async Task<IEnumerable<AppUser>> GetAllAsync()
         {
-            return await _context.Users.AsNoTracking().ToListAsync<AppUser>();
+            return await _context.Users.
+                Include(x => x.Student).
+                Include(x => x.Teacher).
+                Include(x => x.Manager).
+                AsNoTracking().ToListAsync<AppUser>();
         }
 
         public async Task<AppUser> GetByIdAsync(int Id)

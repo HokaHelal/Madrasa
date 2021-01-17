@@ -50,12 +50,12 @@
       </form>
 
       <div class="social-auth-links text-center mt-2 mb-3">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fas fa-graduation-cap mr-2"></i> Sign in as a student
-        </a>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fas fa-graduation-cap mr-2"></i> Sign in as a student
-        </a>
+        <button (click)="loginAs('pope')" class="btn btn-block btn-primary">
+          <i class="fas fa-graduation-cap mr-2"></i> Sign in as a student (Pope)
+        </button>
+        <button (click)="loginAs('guy')" class="btn btn-block btn-primary">
+          <i class="fas fa-graduation-cap mr-2"></i> Sign in as a student (Guy)
+        </button>
         <!-- <a href="#" class="btn btn-block btn-success">
           <i class="fas fa-chalkboard-teacher mr-2"></i> Sign in as a teacher
         </a>

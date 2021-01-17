@@ -6,11 +6,14 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./content-header.component.scss']
 })
 export class ContentHeaderComponent implements OnInit {
-  @Input() title;
+  @Input() title: string;
+  @Input() breadcrumb: string;
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
+    
   }
 
 }

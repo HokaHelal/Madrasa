@@ -64,6 +64,7 @@ namespace Madrasa.Service.Helpers
             CreateMap<NewPostDto, Post>();
             CreateMap<NewTopicDto, Topic>();
             CreateMap<Topic, TopicDetailDto>()
+             .ForMember(dest => dest.Posts, opt => opt.MapFrom(src => src.Posts.OrderBy(p => p.Created)))
              .ForMember(dest => dest.authorPhoto, opt => opt.MapFrom(src => src.Author.PhotoUrl))
              .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.UserLikes));
             CreateMap<Post, PostDetailDto>()

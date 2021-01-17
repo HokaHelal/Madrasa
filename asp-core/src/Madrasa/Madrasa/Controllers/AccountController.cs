@@ -1,6 +1,7 @@
 ﻿using Madrasa.Dto;
 using Madrasa.Service.Interfaces;
 using Madrasa.Service.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -31,7 +32,8 @@ namespace Madrasa.API.Controllers
 
             return Ok(newUser);
         }
-
+        
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {

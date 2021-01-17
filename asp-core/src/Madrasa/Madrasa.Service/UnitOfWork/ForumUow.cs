@@ -97,6 +97,10 @@ namespace Madrasa.Service.UnitOfWork
         public async Task<bool> TogglePinAsync(int topicId)
         {
             var topic = await TopicRepository.GetByIdAsync(topicId);
+            
+            if (topic == null)            
+                throw new NotFoundException("No topic exist with this Id");            
+            
             topic.IsPinned = !topic.IsPinned;
             TopicRepository.Update(topic);
             var isCommitted = await CommitAsync();

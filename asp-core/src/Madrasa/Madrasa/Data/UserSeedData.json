@@ -1,0 +1,57 @@
+[
+  {
+    "Name": "Rogers Bryan",
+    "UserName": "Bryan",
+    "Email": "rogers.bryan@madrasa.com",
+    "DateOfBirth": "2017-09-24",
+    "Created": "2014-03-31",
+    "LastActive": "2020-02-14",
+    "Gender": "male",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/3.jpg",
+    "RoleId": 1
+  },
+  {
+    "Name": "Poole Pope",
+    "UserName": "Pope",
+    "Email": "poole.pope@madrasa.com",
+    "DateOfBirth": "2014-07-26",
+    "Created": "2011-06-19",
+    "LastActive": "2020-01-25",
+    "Gender": "male",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/28.jpg",
+    "RoleId": 1
+  },
+  {
+    "Name": "Kelley Guy",
+    "UserName": "Guy",
+    "Email": "kelley.guy@madrasa.com",
+    "DateOfBirth": "2009-11-18",
+    "Created": "2014-05-31",
+    "LastActive": "2020-09-12",
+    "Gender": "male",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/33.jpg",
+    "RoleId": 1
+  },
+  {
+    "Name": "Mendez Gomez",
+    "UserName": "Gomez",
+    "Email": "mendez.gomez@madrasa.com",
+    "DateOfBirth": "2017-07-28",
+    "Created": "2019-09-13",
+    "LastActive": "2020-01-19",
+    "Gender": "male",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/30.jpg",
+    "RoleId": 1
+  },
+  {
+    "Name": "Brady Keller",
+    "UserName": "Keller",
+    "Email": "brady.keller@madrasa.com",
+    "DateOfBirth": "2015-08-26",
+    "Created": "2018-01-10",
+    "LastActive": "2020-01-08",
+    "Gender": "male",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/26.jpg",
+    "RoleId": 1
+  }
+]
