@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Madrasa.Repository": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
