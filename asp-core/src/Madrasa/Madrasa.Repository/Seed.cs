@@ -39,7 +39,7 @@ namespace Madrasa.Repository
         public static async Task SeedForum(DataContext ctx)
         {
             if (await ctx.Topics.AnyAsync()) return;
-            var fileName = Environment.CurrentDirectory + "/Data/ForumSeedData.json";
+            var fileName = "/Data/ForumSeedData.json";
             var forumData = await System.IO.File.ReadAllTextAsync(fileName);
 
             var topics = JsonSerializer.Deserialize<List<Topic>>(forumData);
@@ -63,7 +63,7 @@ namespace Madrasa.Repository
         public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, DataContext ctx)
         {
             if (await userManager.Users.AnyAsync()) return;
-            var fileName = Environment.CurrentDirectory + "/Data/UserSeedData.json";
+            var fileName =  "/Data/UserSeedData.json";
             var userData = await System.IO.File.ReadAllTextAsync(fileName);
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
