@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,11 +16,15 @@ namespace Madrasa.Repository
     {
         public static async Task SeedLookups(DataContext ctx)
         {
+            if (await ctx.Grades.AnyAsync()) return;
             var grades = new List<Grade>
             {
                 new Grade() {Name = "P-1"},
                 new Grade() {Name = "P-2"},
             };
+
+            if (await ctx.Classes.AnyAsync()) return;
+
             var classes = new List<Class>
             {
                 new Class() { Name = "1-A", GradeId = 1},
@@ -39,7 +45,8 @@ namespace Madrasa.Repository
         public static async Task SeedForum(DataContext ctx)
         {
             if (await ctx.Topics.AnyAsync()) return;
-            var fileName = "/Data/ForumSeedData.json";
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var fileName = assemblyFolder + "/Data/ForumSeedData.json";
             var forumData = await System.IO.File.ReadAllTextAsync(fileName);
 
             var topics = JsonSerializer.Deserialize<List<Topic>>(forumData);
@@ -63,7 +70,8 @@ namespace Madrasa.Repository
         public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, DataContext ctx)
         {
             if (await userManager.Users.AnyAsync()) return;
-            var fileName =  "/Data/UserSeedData.json";
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var fileName = assemblyFolder + "/Data/UserSeedData.json";
             var userData = await System.IO.File.ReadAllTextAsync(fileName);
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);

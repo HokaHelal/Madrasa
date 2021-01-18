@@ -3,6 +3,7 @@ using Madrasa.Service.Interfaces;
 using Madrasa.Service.UnitOfWork;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,10 +13,12 @@ namespace Madrasa.API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly IUserUow _unitOfWork;
+        private static ILogger<AccountController> _logger;
 
-        public AccountController(IUserUow unitOfWork)
+        public AccountController(IUserUow unitOfWork, ILogger<AccountController> logger)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         [HttpPost("new-student")]
@@ -37,6 +40,7 @@ namespace Madrasa.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
+            _logger.LogInformation("Try login...");
             var loggedser = await _unitOfWork.LogInAsync(loginDto);
 
             return Ok(loggedser);

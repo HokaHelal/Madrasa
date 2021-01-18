@@ -51,7 +51,7 @@ namespace Madrasa.API.Middleware
                     ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
                     : new ApiException(context.Response.StatusCode, "Internal Server Error");
                     ;
-
+                response = new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString());
                 await HandleApiException(context, HttpStatusCode.InternalServerError, response);
             }
         }

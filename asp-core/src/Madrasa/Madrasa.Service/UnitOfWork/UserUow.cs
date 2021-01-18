@@ -9,6 +9,7 @@ using Madrasa.Shared.Extenstions;
 using Madrasa.Shared.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Madrasa.Service.UnitOfWork
     public class UserUow : GenericUnitOfWork, IUserUow
     {
         private readonly DataContext _context;
+        private readonly ILogger<UserUow> _logger;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         public IUserRepository UserRepository => new UserRepository(_context);
@@ -29,12 +31,14 @@ namespace Madrasa.Service.UnitOfWork
         private readonly SignInManager<AppUser> _signInManager;
 
         public UserUow(DataContext context,
+            ILogger<UserUow> logger,
             ITokenService tokenService,
             IMapper mapper,
             UserManager<AppUser> userManager, 
             SignInManager<AppUser> signInManager) : base(context)
         {
             _context = context;
+            _logger = logger;
             _tokenService = tokenService;
             _mapper = mapper;
             _userManager = userManager;
@@ -104,7 +108,6 @@ namespace Madrasa.Service.UnitOfWork
         {
             var usr = await _userManager.Users.Include(s => s.Student)
                             .SingleOrDefaultAsync(x => x.UserName == loginDto.username || x.Email == loginDto.username);
-
             if (usr == null) throw new BadRequestException("Invalid Username or password");
 
             var result = await _signInManager.CheckPasswordSignInAsync(usr, loginDto.password, false);
