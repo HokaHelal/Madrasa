@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Madrasa.Repository.Account;
 using Madrasa.Service.Services;
 using Madrasa.Service.Interfaces;
+using Madrasa.Service.SignalR;
 
 namespace Madrasa.Service.Extenstions
 {
@@ -20,6 +21,7 @@ namespace Madrasa.Service.Extenstions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddSingleton<PresenceTracker>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>();
             //.AddDbContext<DataContext>(options => { options.UseSqlServer(connStr); });

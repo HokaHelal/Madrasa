@@ -1,0 +1,18 @@
+<!-- Content Header (Page header) -->
+<app-content-header [title]="'Classroom'"></app-content-header>
+
+
+<div class="card card-solid">
+    <div class="card-body pb-0">
+      <div class="row align-items-stretch">      
+        <app-video-stream *ngFor="let user of users$ | async" [user]="user" ></app-video-stream>
+      </div>
+    </div>
+  </div>
+  
+  <ul class="list-group mt-4">
+    <li class="list-group-item" *ngFor="let user of users$ | async">
+      {{user.username}} - {{user.connectionId}}
+    </li>
+  </ul>
+  

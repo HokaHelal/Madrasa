@@ -52,6 +52,7 @@
               "node_modules/admin-lte/dist/js/pages/dashboard3.js",
 
               "node_modules/quill/dist/quill.min.js",
+              "node_modules/simple-peer/simplepeer.min.js",
               "node_modules/quill-emoji/dist/quill-emoji.js"
             ]
           },

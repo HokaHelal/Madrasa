@@ -1,0 +1,45 @@
+<!-- Content Header (Page header) -->
+<app-content-header [title]="'Class'"></app-content-header>
+
+<div class="emptyDiv">
+  <img class="img-fluid rounded empty-img" src="{{ user.photoUrl }}" *ngIf="!cam.checked" />
+  <video #myCam id="myCam" width="420" *ngIf="cam.checked">
+    Your browser does not support HTML video.
+  </video>
+  <div class="emptyText">
+    <div class="">             
+       <span class="btn-group-toggle mr-2" data-toggle="buttons">
+        <label class="btn btn-sm btn-outline-danger"
+        >
+          <input type="checkbox" 
+          [checked]="mic.checked"
+          value="mic.name"
+          (change)="onMicSelected()"      
+          class="form-check-input"
+          checked autocomplete="off"> 
+          <i class="fas mr-1"
+          [ngClass]="{ 'fa-microphone-alt': mic.checked, 'fa-microphone-alt-slash': !mic.checked }"></i>
+          <strong>MIC</strong>
+        </label>
+      </span>
+      <span class="btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-sm btn-outline-primary"
+        >
+          <input type="checkbox" 
+          [checked]="cam.checked"
+          value="cam.name"
+          (change)="onCamSelected()"      
+          class="form-check-input"
+          checked autocomplete="off"> 
+          <i class="fas mr-1"
+          [ngClass]="{ 'fa-video': cam.checked, 'fa-video-slash': !cam.checked }"></i>
+          <strong>CAM</strong>
+        </label>
+      </span>      
+      </div>
+    <a class="btn btn-lg btn-success mt-1" (click)="JoinClassroom()">
+      <i class="fas fa-door-open mr-1"></i> <strong>Join classroom</strong>
+    </a>
+</div>
+</div>
+

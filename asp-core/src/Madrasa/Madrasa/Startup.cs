@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Madrasa.Service.Extenstions;
 using Madrasa.API.Middleware;
+using Madrasa.Service.SignalR;
 
 namespace Madrasa.API
 {
@@ -23,6 +24,7 @@ namespace Madrasa.API
             services.AddIdentityServices(_config);
 
             services.AddControllers();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +53,7 @@ namespace Madrasa.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ClassroomHub>("hubs/classroom");
                 endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
